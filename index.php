@@ -525,6 +525,24 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtmXSwv4YmAKtcZyyad9W7D4AC08z0Rb4"></script>
     <!-- Site Scripts -->
     <script src="tassets/js/app.js"></script>
+    <script src="js/sweetalert.all.js"></script>
+
+    <?php 
+    if (session_status() == PHP_SESSION_ACTIVE){
+        if ((isset($_SESSION['status']))) {
+            echo '<script>
+            Swal.fire({"title":"Login Successful","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
+        </script>';
+		$_SESSION['status']=NULL;
+        }
+    }
+
+    if (isset($_GET['logout'])) {
+        echo '<script>
+            Swal.fire({"title":"Logout Successful","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"warning","position":"top-end"});
+        </script>';    }
+    ?>
+
 
     <script>
         function readURL(input) {

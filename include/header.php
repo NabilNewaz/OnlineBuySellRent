@@ -80,7 +80,7 @@
                                                 echo '<a href="logout.php">Logout</a>';
                                             }
                                             else{
-                                                echo '<a href="register.html">Register</a>';
+                                                echo '<a href="usersingup.php">Register</a>';
                                             }
                                         ?>
                                         </li>

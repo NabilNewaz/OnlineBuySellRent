@@ -48,11 +48,18 @@ if(isset($_POST['singin'])){
      
     }else{
         // session variable define for user.....
-session_start();
+    session_start();
 		$_SESSION['username']=$row['username'];
 		$_SESSION['id']=$row['id'];
+		$_SESSION['status']='success';
 		
-		header("location:adspost.php");}
+        if (isset($_GET['referer'])) {
+            header("location:adspost.php");
+        }
+        else{
+		    header("location:index.php");
+        }
+    }
 }
 ?>
 
