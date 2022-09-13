@@ -1,0 +1,222 @@
+/* item-trending */
+.item-urgent-ad,
+.item-featured-ad,
+.item-bumped-ad,
+.item-top-ad,
+.item-auction-ad {
+    position: relative;
+}
+
+
+
+.item-featured-ad:after {
+    content: "\f0e7";
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #f85c70;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+}
+
+
+
+.item-urgent-ad:after {
+    content: "";
+    width: 35px;
+    height: 35px;
+    background: url("../../passets/img/urgent_abc.png") no-repeat  ;
+    display: inline-block;
+    background-position: center;
+    background-size: 40px 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    /* background-color: #f85c70; */
+    /* -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%); */
+    /* clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%); */
+}
+
+
+/* a.item-urgent-ad:after {
+    content: "";
+    width: 60px;
+    height: 18px;
+    background: url("/passets/img/urgent_ad.png") no-repeat  ;
+    display: inline-block;
+    background-position: center;
+    background-size: 60px 18px;
+    position: absolute;
+    right: 0;
+    top: 0;
+} */
+
+
+.item-bumped-ad:after {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background: url("../../passets/img/bumped_abc.png") no-repeat  ;
+    display: inline-block;
+    background-position: center;
+    background-size: 25px 25px;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+
+.item-top-ad:after {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background: url("../../passets/img/top_abc.png") no-repeat  ;
+    display: inline-block;
+    background-position: center;
+    background-size: 25px 25px;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+}
+
+
+/* .item-auction-ad:after {
+    content: "";
+    width: 25px;
+    height: 25px;
+    background: url("/passets/img/auction_ad.png") no-repeat  ;
+    display: inline-block;
+    background-position: center;
+    background-size: 25px 25px;
+    position: absolute;
+    right: 15px;
+    bottom: 5px;
+} */
+
+
+#result-empty{
+    padding: 5rem;
+    background-repeat: no-repeat;
+    background-size: 200px;
+    background-position: center;
+}
+
+
+.mobile-post-ad-button {
+    background: #f85c70;
+}
+
+.mobile-post-ad-button:hover {
+    background: #dc3545;
+}
+
+.d_t_color{
+    color: #f85c70!important;
+}
+
+.item-img > a > img {
+    object-fit: contain;
+    width: 100%;
+    object-position: center;
+}
+@media (min-width: 200px) {
+    .item-img > a > img {
+        max-height: 200px;
+    }
+}
+@media (min-width: 576px) {
+    .item-img > a > img {
+        height: 138px;
+    }
+}
+@media (min-width: 768px) {
+    .item-img > a > img {
+        height: 199px;
+    }
+}
+@media (min-width: 992px) {
+    .item-img > a > img {
+        height: 166px;
+    }
+}
+@media (min-width: 1200px) {
+    .item-img > a > img {
+        height: 150px;
+    }
+}
+
+
+.form-input label{
+    height: 150px;
+    display:block;
+    cursor:pointer;
+    position: relative;
+    border: rgb(211, 211, 211) solid 3px ;
+    border-style: dashed;
+
+}
+
+.form-input input {
+    display:none;
+}
+
+.form-input .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+.form-input .preview {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.form-input img {
+    display:none;
+    max-height: 145px;
+}
+
+.sticky-top-5 {
+    top: 5rem!important;
+    z-index: 10!important;
+}
+
+@media (max-width: 576px) {
+    .px-only-sm-1 {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+}
+
+@media (max-width: 576px) {
+    .font-only-sm-1 {
+        font-size: 0.85rem!important;
+        line-height: 20px!important;
+    }
+}
+
+.outline-none {
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.line-height-xs {
+    line-height: 16px!important;
+}
+
+.line-height-sm {
+    line-height: 20px!important;
+}
