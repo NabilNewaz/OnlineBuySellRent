@@ -2,76 +2,10 @@
 error_reporting(0);
 //start user session
 session_start();
-if (isset($_SESSION['username'])) {
-    header("location:./");
-}
-// error_reporting(E_ALL ^ E_NOTICE);
-// error_reporting(0);
-/*?><?php
-session_start();
-require "function/connection.php";
-if(isset($_POST['singin'])){
-    $username = filter_var($_POST['user_name'], FILTER_SANITIZE_STRING);
-    $password = filter_var($_POST['user_pass'], FILTER_SANITIZE_STRING);
-    //$password = sha1($password);
-    $selectQuery = "select * from users where username = '$username' and password = '$password'";
-    $result = $con->query($selectQuery);
-    //$row = $result->fetch_array();
-    //echo $row['firstname'];
-    //echo '<br>';
-    //echo $row['password'];
-
-    $recordsFound = $result->num_rows;
-    if($recordsFound == 1){
-        $row = $result->fetch_array();
-        $_SESSION['usersloggin'] = true;
-        $_SESSION['usersname']=$row['username'];
-        $_SESSION['usersid']=$row['id'];
-        header("location: adspost.php");
-
-        }
-    else {
-        $_SESSION['usersloggin'] = false;
-        }
-
-
-    }
-?><?php */?>
-<?php
-//session_start();
-
-if (isset($_POST['singin'])) {
-    require "function/connection.php";
-
-    $uname = $_POST['user_name'];
-    $upass = $_POST['user_pass'];
-
-    $select_query = "select * from users where (username = '$uname' or email = '$uname') and password = '$upass'";
-    $result = $con->query($select_query);
-    $row = $result->fetch_array();
-
-    if (mysqli_num_rows($result)!=1) {
-        $errorlogin =  true;
-    } else {
-        // session variable define for user.....
-        session_start();
-        $_SESSION['username']=$row['username'];
-        $_SESSION['id']=$row['id'];
-        $_SESSION['email']=$row['email'];
-        $_SESSION['name']=$row['name'];
-        $_SESSION['phone']=$row['phone'];
-        $_SESSION['status']='success';
-
-        if (isset($_GET['referer'])) {
-            header('location:'.$_GET["referer"].'.php');
-        } else {
-            header("location:./");
-        }
-    }
+if (!(isset($_SESSION['username']))) {
+    header("location: login.php?referer=my-order");
 }
 ?>
-
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -84,7 +18,7 @@ if (isset($_POST['singin'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Rent2SellBD</title>
+    <title>Profile - Rent2SellBD</title>
     <link rel="shortcut icon" type="image/x-icon" href="passets/img/favicon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -123,78 +57,82 @@ if (isset($_POST['singin'])) {
 
 </head>
 
-<body class="sticky-header" id="app">
-    <?php
-          include("include/header.php");
+<body class="sticky-header bg-accent" id="app">
+    <!-- ScrollUp Start Here -->
+    <a href="#wrapper" data-type="section-switch" class="scrollup">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+    <!-- Preloader End Here -->
+    <div id="wrapper" class="wrapper">
+        <?php
+include "include/header.php";
 ?>
 
-    <div class="container py-5">
-        <div class="myaccount-login-form">
-            <div class="light-box-content">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="form-box login-form shadow p-3">
-                            <h3 class="item-title text-center">Login</h3>
-                            <div class="d-flex justify-content-between py-3">
-                                <div class="pr-1 w-50">
-                                    <a href="" class="btn btn-block btn-primary btn-block"><i
-                                            class="fab fa-facebook"></i> Login with Facebook</a>
-                                </div>
-                                <div class="pl-1 w-50">
-                                    <a href="" class="btn btn-block btn-danger btn-block"><i class="fab fa-google"></i>
-                                        Login with Google</a>
-                                </div>
+        <main class="">
+            <section class="py-3 bg-accent">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 sidebar-break-sm sidebar-widget-area mt-0" id="sticky-sidebar">
+                            <div
+                                class="widget-bottom-margin widget-account-menu widget-light-bg sticky-top sticky-top-5">
+                                <h3 class="widget-border-title">Menu</h3>
+                                <ul class="nav nav-tabs flex-column" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="user-profile.php">Dashboard</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="user-account-detail.php">Account details</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="my-store.php">Create Store</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="my-ads.php">My ads</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="favourite-ads.php">Favourites</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="my-coupon.php">My coupon code</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="my-order.php">My order</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="change-password.php">Change Password</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="logout.php"">
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <form method="POST" action="" name="signup">
-                                <div class="form-group">
-                                    <label for="email">User Name or Email :</label>
-                                    <input type="text" name="user_name" id="user_name" class="form-control" required>
-                                </div>
+                        </div>
+                        <div class=" col-lg-9">
+                                            <div class="tab-content">
 
-                                <div class="form-group">
-                                    <label for="passsword">Password</label>
-                                    <input type="password" name="user_pass" id="user_pass" class="form-control"
-                                        required>
-                                </div>
+                                                <div class="" id="result-empty"
+                                                    data-bg-image="tassets/images/result_empty.png"
+                                                    style="background-image: url('tassets/images/result_empty.png');">
+                                                </div>
+                                                <h3 class="text-center text-secondary bg-light py-3">Empty</h3>
 
-                                <div class="form-group d-flex">
-                                    <div class="post-section post-contact">
-                                        <div class=text-center>
-                                            <div class="form-group">
-                                                <input type="submit" value="Login" name="singin" id="singin"
-                                                    class="submit-btn">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-check form-check-box">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                                        <label for="check-password">Remember Me</label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <a class="forgot-password" href="password/reset.html">
-                                        Forgot Your Password?
-                                    </a>
-                                </div>
-                            </form>
-
-                            <h3 class="text-center bg-light">OR</h3>
-                            <div class="">
-                                <a class="btn btn-block btn-info" href="usersingup.php">Sign Up</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
 
-    </div>
     <?php
-include("include/footer.php");
-
+    include("include/footer.php");
 ?>
+
+
 
     <!-- Jquery Js -->
     <script src="tassets/dependencies/jquery/js/jquery.min.js"></script>
@@ -229,12 +167,12 @@ include("include/footer.php");
     <script src="js/sweetalert.all.js"></script>
 
     <?php
-    if ($errorlogin == true) {
-        if ((!isset($_SESSION['status']))) {
+    if (session_status() == PHP_SESSION_ACTIVE) {
+        if ((isset($_SESSION['status']))) {
             echo '<script>
-                Swal.fire({"title":"Wrong Credentials ","text":"","timer":6000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"error","position":"top-end"});
+                Swal.fire({"title":"Login Successful","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
             </script>';
-            // $errorlogin == flase;
+            $_SESSION['status']=null;
         }
     }
 ?>
@@ -297,17 +235,6 @@ include("include/footer.php");
             $('.modal_able_image_src').attr('src', imgSrc);
         })
     </script>
-
-    <script src="js/vendor/jquery-1.10.2.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')
-    </script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-
-
 </body>
 
 </html>
