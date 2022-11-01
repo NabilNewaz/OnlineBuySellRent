@@ -54,6 +54,9 @@ if (isset($_POST['singin'])) {
         $errorlogin =  true;
     } else {
         // session variable define for user.....
+        $date = date("y-m-d h:i:s");
+        $user_id = $row['id'];
+        $con->query("UPDATE users SET lastlogindate = '$date' WHERE id = '$user_id'");
         session_start();
         $_SESSION['username']=$row['username'];
         $_SESSION['id']=$row['id'];
@@ -64,8 +67,10 @@ if (isset($_POST['singin'])) {
 
         if (isset($_GET['referer'])) {
             header('location:'.$_GET["referer"].'.php');
+            exit();
         } else {
             header("location:./");
+            exit();
         }
     }
 }

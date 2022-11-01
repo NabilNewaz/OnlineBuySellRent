@@ -782,9 +782,18 @@
 
     <?php
     if (session_status() == PHP_SESSION_ACTIVE) {
-        if ((isset($_SESSION['status']))) {
+        if ($_SESSION['status'] == "success") {
             echo '<script>
             Swal.fire({"title":"Login Successful","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
+        </script>';
+            $_SESSION['status']=null;
+        }
+    }
+
+    if (session_status() == PHP_SESSION_ACTIVE) {
+        if ($_SESSION['status'] == "success_signup") {
+            echo '<script>
+            Swal.fire({"title":"Successfully Registered","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
         </script>';
             $_SESSION['status']=null;
         }

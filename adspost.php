@@ -1,5 +1,7 @@
 <?php
 error_reporting(0);
+require "function/connection.php";
+$catagories = $con->query("SELECT * FROM category");
 //start user session
 session_start();
 if (!(isset($_SESSION['username']))) {
@@ -84,6 +86,7 @@ include("function/function.php");
         <?php
     include("include/sidebar.php");
 ?>
+
         <br>
         <div class="col-xl-9 col-lg-8">
             <div class="flex-heading-layout1">
@@ -112,22 +115,15 @@ include("function/function.php");
                                 <div class="col-sm-9">
                                     <div class="form-group">
                                         <select class="form-control" name="category" id="category"
-                                            class="form-control select-box " required>
+                                            onchange="subCat(this.value);" class="form-control select-box " required>
                                             <option disabled selected>Select Category</option>
-                                            <option value="1">Business &amp; Industry</option>
-                                            <option value="2">Vehicle</option>
-                                            <option value="3">Book &amp; Magazine</option>
-                                            <option value="4">Electronics</option>
-                                            <option value="5">Home &amp; Living</option>
-                                            <option value="6">Job</option>
-                                            <option value="7">Land &amp; Property</option>
-                                            <option value="8">Services</option>
-                                            <option value="9">Health &amp; Beauty</option>
-                                            <option value="10">Fashion &amp; Life Style</option>
-                                            <option value="11">Hobby, Sports &amp; Kids</option>
-                                            <option value="12">Pet &amp; Animal</option>
-                                            <option value="13">Food &amp; Agriculture</option>
-                                            <option value="14">Grocery</option>
+                                            <?php
+                                                 while ($row = mysqli_fetch_array($catagories)) { ?>
+                                            <option
+                                                value="<?php echo $row["id"];?>">
+                                                <?php echo $row["categoryname"];?>
+                                            </option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>
@@ -139,13 +135,28 @@ include("function/function.php");
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="form-group">
-                                        <select id="child-master" class="form-control select-box "
-                                            name="sub_category_id" id="sub_category_id" required>
+                                        <select class="form-control select-box" name="subcategory" id="subcategory"
+                                            required>
+                                            <script>
+                                                function subCat(id) {
+                                                    $.ajax({
+                                                        url: `getSubcat.php?id=${id}`,
+                                                        type: "POST",
+                                                        data: {
+                                                            catId: id
+                                                        },
+                                                        success: function(result) {
+                                                            $('#subcategory').html(result);
+                                                        }
+                                                    });
+                                                };
+                                            </script>
                                             <option disabled selected>Select Sub Category</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label class="control-label">Types Of Ads <span>*</span>
@@ -452,8 +463,8 @@ include("function/function.php");
                                             <select class="form-control select-box " name="area" id="area" required>
                                                 <option disabled selected>Select Division</option>
                                                 <?php
-                    //call function divisions() to get data from division table
-                    echo area() ;
+        //call function divisions() to get data from division table
+        echo area() ;
 ?>
                                             </select>
                                         </div>
@@ -544,7 +555,6 @@ include("function/function.php");
     <script src="js/bootstrap.min.js "></script>
     <script src="js/bootstrap-imageupload.min.js"></script>
 
-
     <script>
         var $imageupload = $('.imageupload');
         $imageupload.imageupload();
@@ -620,35 +630,37 @@ include("function/function.php");
             }); //end change() function for division selectbox
 
 
-            //----for Category-----//
-            $("#subcategory").attr("disabled", "disabled");
-            $("#category").change(function() {
-                //get value from division select box & put in a variable
-                var category = $(this).val();
-                //if division value not -1 then show subarea
-                if (category != "-1") {
-                    $("#subcategory").removeAttr("disabled");
+            // //----for Category-----//
+            // $("#subcategory").attr("disabled", "disabled");
+            // $("#category").change(function() {
+            //     alert("hello");
 
-                    //call php file using post() method
-                    $.post("function/functions.php", {
-                            action: "populateSubcategory",
-                            categoryID: category
-                        },
-                        function(subcategoryData) {
-                            $("#subcategory").html(subcategoryData);
+            //     //get value from division select box & put in a variable
+            //     var category = $(this).val();
+            //     //if division value not -1 then show subarea
+            //     if (category != "-1") {
+            //         $("#subcategory").removeAttr("disabled");
 
-                            /*var divisionName = "<h3>"+$("option:selected").html()+"</h3>";
-                            $("#output").html(divisionName + districtData);*/
-                        }); //end post() method for district populating in selectbox
+            //         //call php file using post() method
+            //         $.post("function/functions.php", {
+            //                 action: "populateSubcategory",
+            //                 categoryID: category
+            //             },
+            //             function(subcategoryData) {
+            //                 $("#subcategory").html(subcategoryData);
+
+            //                 /*var divisionName = "<h3>"+$("option:selected").html()+"</h3>";
+            //                 $("#output").html(divisionName + districtData);*/
+            //             }); //end post() method for district populating in selectbox
 
 
-                } //end if(-1)
-                else {
-                    $("#subcategory").attr("disabled", "disabled");
-                    $("#subcategory").val("-1");
-                }
+            //     } //end if(-1)
+            //     else {
+            //         $("#subcategory").attr("disabled", "disabled");
+            //         $("#subcategory").val("-1");
+            //     }
 
-            });
+            // });
 
         }); //end jQuery
     </script>
