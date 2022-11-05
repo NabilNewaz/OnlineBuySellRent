@@ -154,7 +154,8 @@ include "include/header.php";
                                                     </div>
                                                 </div>
                                                 <div class="item-content">
-                                                    <h3 class="item-title"><?php echo $_SESSION['name'] ?>
+                                                    <h3 class="item-title">
+                                                        <?php echo $_SESSION['name'] ?>
                                                     </h3>
                                                     <div class="item-email"><span>Email : &nbsp;
                                                         </span><?php echo $_SESSION['email'] ?>
@@ -351,7 +352,7 @@ include "include/header.php";
                         <div class=''>
                             <a class='logo-mobile' href='index.html'><img src='images/Rent2SellBDmobile.png' style="max-width:100%; hight:auto;  padding-bottom: 6px;" alt='logo' class='img-fluid'/></a>
                         </div>
-                        <div class='mr-5 d-flex'>
+                        <div class='mr-5 mt-1 d-flex align-items-center'>
                             <a href='/ad/all-ad'' class="btn btn-sm btn-light font-weight-bold">Ads</a>
 
                             <div class="dropdown">

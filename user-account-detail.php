@@ -136,7 +136,8 @@ include  "include/header.php";
                                                         </div>
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
-                                                                <div class="text-value"><?php echo $_SESSION['name'] ?>
+                                                                <div class="text-value">
+                                                                    <?php echo $_SESSION['name'] ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -147,7 +148,8 @@ include  "include/header.php";
                                                         </div>
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
-                                                                <div class="text-value"><?php echo $_SESSION['email'] ?>
+                                                                <div class="text-value">
+                                                                    <?php echo $_SESSION['email'] ?>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -364,7 +366,7 @@ include  "include/header.php";
                         <div class=''>
                             <a class='logo-mobile' href='index.html'><img src='images/Rent2SellBDmobile.png' style="max-width:100%; hight:auto;  padding-bottom: 6px;" alt='logo' class='img-fluid'/></a>
                         </div>
-                        <div class='mr-5 d-flex'>
+                        <div class='mr-5 mt-1 d-flex align-items-center'>
                             <a href='/ad/all-ad'' class="btn btn-sm btn-light font-weight-bold">Ads</a>
 
                             <div class="dropdown">

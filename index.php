@@ -68,7 +68,7 @@
                     <br>
                     <h4>Browse Our Top Categories</h4>
                     <div id="iconbarf" class="row text-center">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="category-box-layout1">
                                 <a href="catWiseItems.php?id=5">
                                     <div class="item-icon">
@@ -80,7 +80,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="category-box-layout1">
                                 <a href="catWiseItems.php?id=15">
                                     <div class="item-icon">
@@ -92,7 +92,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="category-box-layout1">
                                 <a href="catWiseItems.php?id=8">
                                     <div class="item-icon">
@@ -104,7 +104,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="category-box-layout1">
                                 <a href="catWiseItems.php?id=3">
                                     <div class="item-icon">
@@ -116,7 +116,32 @@
                                 </a>
                             </div>
                         </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="category-box-layout1">
+                                <a href="catWiseItems.php?id=8">
+                                    <div class="item-icon">
+                                        <img src="images/16150053460Qclp.png" alt="category">
+                                    </div>
+                                    <div class="item-content">
+                                        <h3 class="item-title">Home</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="category-box-layout1">
+                                <a href="catWiseItems.php?id=3">
+                                    <div class="item-icon">
+                                        <img src="images/1615008742hbVcV.png" alt="category">
+                                    </div>
+                                    <div class="item-content">
+                                        <h3 class="item-title">Services</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+
                     <p class="iconf">
                         <a class="icon" href="#"><img style="padding-bottom:2px;" width="55" height="55"
                                 src="images/deal31294.png"> Rent2SellBD Deals </a><strong
@@ -834,7 +859,7 @@
                         <div class=''>
                             <a class='logo-mobile' href='index.html'><img src='images/Rent2SellBDmobile.png' style="max-width:100%; hight:auto;  padding-bottom: 6px;" alt='logo' class='img-fluid'/></a>
                         </div>
-                        <div class='mr-5 d-flex'>
+                        <div class='mr-5 mt-1 d-flex align-items-center'>
                             <a href='/ad/all-ad'' class="btn btn-sm btn-light font-weight-bold">Ads</a>
 
                             <div class="dropdown">

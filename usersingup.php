@@ -231,11 +231,12 @@ if (isset($_POST['sub'])) {
             $result = $db->query($select_query);
             $row = $result->fetch_array();
             session_start();
-            $_SESSION['username']=$row['username'];
-            $_SESSION['id']=$row['id'];
-            $_SESSION['email']=$row['email'];
-            $_SESSION['name']=$row['name'];
-            $_SESSION['phone']=$row['phone'];
+            $_SESSION=$row;
+            // $_SESSION['username']=$row['username'];
+            // $_SESSION['id']=$row['id'];
+            // $_SESSION['email']=$row['email'];
+            // $_SESSION['name']=$row['name'];
+            // $_SESSION['phone']=$row['phone'];
             $_SESSION['status']='success_signup';
             $URL="./login.php";
             echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
@@ -308,7 +309,7 @@ if (isset($_POST['sub'])) {
                         <div class=''>
                             <a class='logo-mobile' href='index.html'><img src='images/Rent2SellBDmobile.png' style="max-width:100%; hight:auto;  padding-bottom: 6px;" alt='logo' class='img-fluid'/></a>
                         </div>
-                        <div class='mr-5 d-flex'>
+                        <div class='mr-5 mt-1 d-flex align-items-center'>
                             <a href='/ad/all-ad'' class="btn btn-sm btn-light font-weight-bold">Ads</a>
 
                             <div class="dropdown">
