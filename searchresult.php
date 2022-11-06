@@ -137,10 +137,12 @@ if (isset($_GET["keyword"])) {
     if (isset($_GET['adtype'])) {
         $adtype = $_GET['adtype'];
         $sql = "SELECT * FROM product WHERE title LIKE '%$searchkeyword%' and adtype = '$adtype' LIMIT {$startpoint},{$limit}";
+        $sqlfortotal = "SELECT * FROM product WHERE title LIKE '%$searchkeyword%' and adtype = '$adtype'";
         $statement ="product WHERE title LIKE '%$searchkeyword%' and adtype = '$adtype'"; //you have to pass your query over here
     } else {
         $adtype = ' ';
         $sql = "SELECT * FROM product WHERE title LIKE '%$searchkeyword%' LIMIT {$startpoint},{$limit}";
+        $sqlfortotal = "SELECT * FROM product WHERE title LIKE '%$searchkeyword%'";
         $statement ="product WHERE title LIKE '%$searchkeyword%'"; //you have to pass your query over here
     }
     // $res=mysqli_query($con, "select * from product LIMIT {$startpoint},{$limit}") or die("eRROR");
@@ -148,7 +150,7 @@ if (isset($_GET["keyword"])) {
     $result = mysqli_query($con, $sql) or die("eRROR");
     // $result = $con->query($sele);
 
-    $totalcount=mysqli_num_rows(mysqli_query($con, $sql));
+    $totalcount=mysqli_num_rows(mysqli_query($con, $sqlfortotal));
     ?>
                     <div class="col-md-6">
                         <h2 class="item-title">
