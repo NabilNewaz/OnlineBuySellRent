@@ -92,7 +92,7 @@ include("include/sidebar.php");
     $pro_id = 5;
     $limit = 5; //if you want to dispaly 10 records per page then you have to change here
     $startpoint = ($page * $limit) - $limit;
-    $statement ="product where categoryid='".$pro_id."'"; //you have to pass your query over here
+    $statement ="product where hotitem='1'"; //you have to pass your query over here
     // $res=mysqli_query($con, "select * from product where categoryid='".$pro_id."' LIMIT {$startpoint},{$limit}") or die("eRROR");
     $res=mysqli_query($con, "select * from product where hotitem='1'") or die("eRROR");
 
@@ -138,7 +138,7 @@ include("include/sidebar.php");
                     <div class="col-md-6">
                         <h2 class="item-title">
                             Showing <?php echo $startpoint+1 ?> to
-                            <?php echo ($page >=2) ? (($page-1)*$limit) + ($totalcount - (($page-1)*$limit)) : ($page*$limit)  ?>
+                            <?php echo ($totalcount > $limit) ? ($page >=2) ? (($page-1)*$limit) + ($totalcount - (($page-1)*$limit)) : ($page*$limit) : $totalcount  ?>
                             of
                             <?php echo $totalcount ?>
                             results

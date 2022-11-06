@@ -2,7 +2,14 @@
     <div class="col-xl-3 col-lg-4 sidebar-break-md sidebar-widget-area d-none d-md-block" id="accordion">
         <div class="widget-bottom-margin-md widget-accordian widget-filter">
             <h3 class="widget-bg-title">Filter</h3>
-            <form action="https://prothomei.com/ad/all-ad" method="get">
+            <?php
+            if (isset($_GET["keyword"])) {
+                $searchkeyword = $_GET['keyword'];
+            } else {
+                $searchkeyword = '';
+            }
+            ?>
+            <form action="searchresult.php" method="get">
                 <div class="accordion-box">
                     <div class="card filter-type filter-item-list">
                         <div class="card-header">
@@ -17,27 +24,27 @@
                                     <ul>
                                         <li class="form-check">
                                             <input class="form-check-input" type="radio" name="adtype" id="adtype-0"
-                                                value="Buy">
+                                                value="buy">
                                             <label class="form-check-label" for="adtype-0">Buy</label>
                                         </li>
                                         <li class="form-check">
                                             <input class="form-check-input" type="radio" name="adtype" id="adtype-1"
-                                                value="Sell">
+                                                value="sell">
                                             <label class="form-check-label" for="adtype-1">Sell</label>
                                         </li>
                                         <li class="form-check">
                                             <input class="form-check-input" type="radio" name="adtype" id="adtype-2"
-                                                value="Exchange">
+                                                value="exchange">
                                             <label class="form-check-label" for="adtype-2">Exchange</label>
                                         </li>
                                         <li class="form-check">
                                             <input class="form-check-input" type="radio" name="adtype" id="adtype-4"
-                                                value="Rental">
+                                                value="rental">
                                             <label class="form-check-label" for="adtype-4">Rental</label>
                                         </li>
                                         <li class="form-check">
                                             <input class="form-check-input" type="radio" name="adtype" id="adtype-6"
-                                                value="Services">
+                                                value="services">
                                             <label class="form-check-label" for="adtype-6">Services</label>
                                         </li>
                                     </ul>
@@ -45,6 +52,42 @@
                             </div>
                         </div>
                     </div>
+                    <div style="border-bottom:0.0625rem solid #ced4da;"
+                        class="card filter-price-range filter-item-list multi-accordion">
+                        <div class="card-header">
+                            <a class="parent-list" role="button" data-toggle="collapse" href="#collapseFour"
+                                aria-expanded="true">
+                                Price Range
+                            </a>
+                        </div>
+                        <div id="collapseFour" class="collapse show" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="price-range-content">
+                                    <div class="row">
+                                        <div class="col-lg-6 form-group">
+                                            <input type="number" name="price-min" class="form-control" placeholder="min"
+                                                value="">
+                                        </div>
+                                        <div class="col-lg-6 form-group">
+                                            <input type="number" name="price-max" class="form-control" placeholder="max"
+                                                value="">
+                                        </div>
+                                        <div class="col-12 form-group">
+                                            <div class="d-flex justify-content-between">
+                                                <button class="filter-btn" type="submit">Apply Filter</button>
+                                                <span class="px-2"></span>
+                                                <a class="btn btn-outline-secondary" style="padding-top: 11px"
+                                                    href="all-ads.php">Reset</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input hidden type="hidden" name="keyword" id="keyword"
+                        value="<?php echo $searchkeyword ?>">
                     <div class="card filter-category multi-accordion filter-item-list">
                         <div class="card-header">
                             <a class="parent-list" role="button" data-toggle="collapse" href="#collapseTwo"
@@ -496,39 +539,6 @@
                                             <a class="parent-list collapsed" role="button" href="subarea.php?id=8">
                                                 Mymensingh
                                             </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card filter-price-range filter-item-list">
-                        <div class="card-header">
-                            <a class="parent-list" role="button" data-toggle="collapse" href="#collapseFour"
-                                aria-expanded="true">
-                                Price Range
-                            </a>
-                        </div>
-                        <div id="collapseFour" class="collapse show" data-parent="#accordion">
-                            <div class="card-body">
-                                <div class="price-range-content">
-                                    <div class="row">
-                                        <div class="col-lg-6 form-group">
-                                            <input type="number" name="price-min" class="form-control" placeholder="min"
-                                                value="">
-                                        </div>
-                                        <div class="col-lg-6 form-group">
-                                            <input type="number" name="price-max" class="form-control" placeholder="max"
-                                                value="">
-                                        </div>
-                                        <div class="col-12 form-group">
-                                            <div class="d-flex justify-content-between">
-                                                <button class="filter-btn" type="submit">Apply Filter</button>
-                                                <span class="px-2"></span>
-                                                <a class="btn btn-outline-secondary" style="padding-top: 11px"
-                                                    href="all-ad.html">Reset</a>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>

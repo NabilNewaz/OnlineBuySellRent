@@ -171,11 +171,11 @@ include("function/function.php");
                                         <select class="form-control" type="radio" name="type" id="type"
                                             class="form-control select-box " required>
                                             <option disabled selected>Select Types</option>
-                                            <option value="For Buy">Buy</option>
-                                            <option value="For Sell">Sell</option>
-                                            <option value="For Rental">Rental</option>
-                                            <option value="For Exchange">Exchange</option>
-                                            <option value="For Services">Services</option>
+                                            <option value="buy">Buy</option>
+                                            <option value="sell">Sell</option>
+                                            <option value="rental">Rental</option>
+                                            <option value="exchange">Exchange</option>
+                                            <option value="services">Services</option>
                                         </select>
                                     </div>
                                 </div>

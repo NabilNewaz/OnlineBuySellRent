@@ -86,46 +86,40 @@ include("include/sidebar.php");
                 data-r-large-dots="false" data-r-extra-large="3" data-r-extra-large-nav="false"
                 data-r-extra-large-dots="false">
                 <?php
-if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    if (empty($name)) {
-        $make = '<h4>You must type a word to search!</h4>';
-    } else {
         include("pagination/function.php");
-        $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
-        $pro_id = 5;
-        $limit = 5; //if you want to dispaly 10 records per page then you have to change here
-        $startpoint = ($page * $limit) - $limit;
-        $statement ="product where categoryid='".$pro_id."'"; //you have to pass your query over here
-        $res=mysqli_query($con, "select * from product where categoryid='".$pro_id."' LIMIT {$startpoint},{$limit}") or die("eRROR");
+    $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
+    $pro_id = 5;
+    $limit = 5; //if you want to dispaly 10 records per page then you have to change here
+    $startpoint = ($page * $limit) - $limit;
+    $statement ="product where categoryid='".$pro_id."'"; //you have to pass your query over here
+    // $res=mysqli_query($con, "select * from product where categoryid='".$pro_id."' LIMIT {$startpoint},{$limit}") or die("eRROR");
+    $res=mysqli_query($con, "select * from product where hotitem='1'") or die("eRROR");
 
-        while ($row=mysqli_fetch_array($res)) {
-            echo "<div class='product-box-layout1'>
-			<div class=''>
-					<div class='item-img'>
-						<a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/".$row['image']."' alt='Featured ad'></a>
-					</div>
-				</div>
-			 <div class='item-content py-0'>
-				<div class='item-tag d-none d-md-block'><a href='all-ad3eca.html?category=4'>Electronics</a></div>
-					<div class='item-price'>
-						<span class='currency-symbol'>BDT </span>".$row['price']."
-					</div>
-			 <h3 class='item-title mb-0' style='height:55px'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
-			 <h3 class='item-title mb-0'><span class='ml-0'>".$row['condition']."</span></h3>
-			 <ul class='entry-meta'>
-			<li class='d-none d-md-block'><i class='far fa-clock'></i>1 year ago</li>
-			<li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i> আজিমপুর</div></li>
-			</ul>
-
-			<div class='d-none d-md-block'>
-			</div>
-
-			</div>
-			</div>";
-        }
+    while ($row=mysqli_fetch_array($res)) {
+        echo "<div class='product-box-layout1'>
+                    <div class=''>
+                            <div class='item-img'>
+                                <a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/adsimages/".$row['image0']."' alt='Featured ad'></a>
+                            </div>
+                        </div>
+                    <div class='item-content py-0'>
+                        <div class='item-tag d-none d-md-block'><a href='all-ad3eca.html?category=4'>Electronics</a></div>
+                            <div class='item-price'>
+                                <span class='currency-symbol'>BDT </span>".$row['price']."
+                            </div>
+                    <h3 class='item-title mb-0' style='height:55px'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
+                    <h3 class='item-title mb-0'><span class='ml-0'>".$row['condition']."</span></h3>
+                    <ul class='entry-meta'>
+                    <li class='d-none d-md-block'><i class='far fa-clock'></i>1 year ago</li>
+                    <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i> আজিমপুর</div></li>
+                    </ul>
+    
+                    <div class='d-none d-md-block'>
+                    </div>
+    
+                    </div>
+                    </div>";
     }
-}
 
     ?>
 
@@ -133,10 +127,38 @@ if (isset($_POST['submit'])) {
 
             <div class="product-filter-heading">
                 <div class="row align-items-center">
+                    <?php
+if (isset($_GET["keyword"])) {
+    $searchkeyword = $_GET['keyword'];
+    $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
+    $limit = 9; //if you want to dispaly 10 records per page then you have to change here
+    $startpoint = ($page * $limit) - $limit;
 
+    if (isset($_GET['adtype'])) {
+        $adtype = $_GET['adtype'];
+        $sql = "SELECT * FROM product WHERE title LIKE '%$searchkeyword%' and adtype = '$adtype' LIMIT {$startpoint},{$limit}";
+        $statement ="product WHERE title LIKE '%$searchkeyword%' and adtype = '$adtype'"; //you have to pass your query over here
+    } else {
+        $adtype = ' ';
+        $sql = "SELECT * FROM product WHERE title LIKE '%$searchkeyword%' LIMIT {$startpoint},{$limit}";
+        $statement ="product WHERE title LIKE '%$searchkeyword%'"; //you have to pass your query over here
+    }
+    // $res=mysqli_query($con, "select * from product LIMIT {$startpoint},{$limit}") or die("eRROR");
+
+    $result = mysqli_query($con, $sql) or die("eRROR");
+    // $result = $con->query($sele);
+
+    $totalcount=mysqli_num_rows(mysqli_query($con, $sql));
+    ?>
                     <div class="col-md-6">
                         <h2 class="item-title">
-                            Showing Search Results
+                            Showing
+                            <?php echo ($totalcount == 0) ? $startpoint : $startpoint+1 ?>
+                            to
+                            <?php echo ($totalcount > $limit) ? ($page >=2) ? (($page-1)*$limit) + ($totalcount - (($page-1)*$limit)) : ($page*$limit) : $totalcount  ?>
+                            of
+                            <?php echo $totalcount ?>
+                            results
                         </h2>
                     </div>
 
@@ -182,14 +204,6 @@ if (isset($_POST['submit'])) {
                 <div class="row">
 
                     <?php
-if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    if (empty($name)) {
-        $make = '<h4>You must type a word to search!</h4>';
-    } else {
-        $sele = "SELECT * FROM product WHERE title LIKE '%$name%'";
-        $result = $con->query($sele);
-
         if ($make = $result->num_rows > 0) {
             while ($row =$result->fetch_array(MYSQLI_ASSOC)) {
                 echo "<div class='col-xl-4  col-6 px-only-sm-1'>
@@ -198,7 +212,7 @@ if (isset($_POST['submit'])) {
 								<div class='product-box-layout1 pb-2'>
 									<div class=''>
 										<div class='item-img'>
-										<a href='itemDetails.php?details=".$row['id']."' class=''><img src='images/".$row['image']."' alt='Product'></a>
+										<a href='itemDetails.php?details=".$row['id']."' class=''><img src='images/adsimages/".$row['image0']."' alt='Product'></a>
 									</div>
 								</div>
 								<div class='item-content py-0 px-1 px-sm-3'>
@@ -226,7 +240,7 @@ if (isset($_POST['submit'])) {
 						<div class='product-box-layout3'>
 							<div class='mr-3 '>
 								<div class='item-img mr-0'>
-									<a href='itemDetails.php?details=".$row['id']."' class=''> <img src='images/".$row['image']."' alt='Product' style='object-position: top;'></a>
+									<a href='itemDetails.php?details=".$row['id']."' class=''> <img src='images/adsimages/".$row['image0']."' alt='Product' style='object-position: top;'></a>
 								</div>
 							</div>
 
@@ -282,13 +296,17 @@ if (isset($_POST['submit'])) {
             </div>";
             echo "</div>";
         }
-    }
 }
 
     ?>
 
                 </div>
             </div>
+            <?php if ($make = $result->num_rows > 0) {
+                echo pagination($con, $statement, $limit, $page, $url='searchresult.php?keyword='.$searchkeyword.'&');
+                echo "</div></br></br>";
+            }
+    ?>
         </div>
     </div>
     </div>

@@ -3,6 +3,10 @@
  <a href="#wrapper" data-type="section-switch" class="scrollup">
      <i class="fas fa-angle-double-up"></i>
  </a>
+ <!-- ScrollUp End Here -->
+ <!-- Preloader Start Here -->
+ <div id="preloader"></div>
+ <!-- Preloader End Here -->
 
  <div id="wrapper" class="wrapper">
 
