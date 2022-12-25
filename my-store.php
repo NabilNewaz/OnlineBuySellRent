@@ -190,7 +190,7 @@ $storerow=mysqli_fetch_array($store_details);
                                                                         <img id=store-logo-img <?php if ($storerow > 0) {
                                                                             echo "src=images/storeimages/".$storerow['StoreLogo']."";
                                                                         } else {
-                                                                            echo 'src="tassets/images/default_store_banner.jpg"' ;
+                                                                            echo 'src="tassets/images/default_store_logo.jpg"' ;
                                                                         } ?>
                                                                         alt="Store Banner" width="100">
                                                                     </div>
@@ -577,14 +577,18 @@ include("include/footer.php");
            $twitter =$_POST['twitter'];
            $linkedin =$_POST['linkedin'];
            $youtube =$_POST['youtube'];
+           $date = date("y-m-d h:i:s");
 
      //    (`id`, `user_id`, `title`, `description`, `price`, `image`, `areaid`, `subareaid`, `categoryid`, `subcategoryid`, `adtype`, `condition`, `expiredate`)
-           $upadate = "UPDATE users SET storeid = $userid WHERE id = $userid";
-           $db->query($upadate);
-           $insertdata = "INSERT INTO `buynsell`.`store` VALUES ('', '$userid', '$banner', '$logo', '$openinghours', '$openinghourstart', '$openinghourend', '$storename','$slogan','$location','$website','$mobile','$email', '$description', '$facebook', '$twitter', '$linkedin', '$youtube')";
+           $insertdata = "INSERT INTO `buynsell`.`store` VALUES ('', '$userid', '$banner', '$logo', '$openinghours', '$openinghourstart', '$openinghourend', '$storename','$slogan','$location','$website','$mobile','$email', '$description', '$facebook', '$twitter', '$linkedin', '$youtube','$date')";
            $result = $db->query($insertdata);
            if ($result) {
                $_SESSION['store_form_submit']='true';
+               $store_details=mysqli_query($con, "SELECT id FROM store where storeUserId = $userid") or die("eRROR");
+               $storerow=mysqli_fetch_array($store_details);
+               $storeid=$storerow['id'];
+               $upadate = "UPDATE users SET storeid = $storeid WHERE id = $userid";
+               $db->query($upadate);
                echo '<script>
          Swal.fire({"title":"Store Updated Successfully","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
          window.location = "my-store.php";

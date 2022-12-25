@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Rent2SellBD</title>
+    <title>Stores - Rent2SellBD</title>
     <link rel="shortcut icon" type="image/x-icon" href="passets/img/favicon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,221 +51,63 @@
 
 <body class="sticky-header bg-accent" id="app">
     <?php
-          include("include/header.php");
+        include("include/header.php");
+    ?>
+    <?php
+    require("function/functions.php");
+    include("function/connection.php");
+    include("function/function.php");
     ?>
 
     <main class="">
         <section class="store-wrap-layout1 bg-accent">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/ms-kabir-enterprise">
-                                <div class="item-logo">
-                                    <img src="/images/1669737461Qc0Y9.JPG" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">M/S Kabir Enterprise</h3>
-                                    <div class="ad-count">5 ad</div>
-                                </div>
-                            </a>
+
+                    <?php
+                        $res=mysqli_query($con, "select * from store") or die("eRROR");
+
+    while ($row=mysqli_fetch_array($res)) {
+        $storeid = $row['id'];
+        $storename = $row['storeName'];
+        $storelogo = $row['StoreLogo'];
+        $addCount = mysqli_query($con, "select count(*) AS NumberOfProducts from Product where storeid = $storeid") or die("eRROR");
+        $addNumberArr = mysqli_fetch_array($addCount);
+        $addNumber = $addNumberArr['NumberOfProducts'];
+        echo "
+        <div class='col-xl-3 col-lg-4 col-md-6'>
+        <div class='store-list-layout1'>
+            <a href='store-view?storeid=".$storeid."'>
+                <div class='item-logo'>
+                    <img src='images/storeimages/".$storelogo."' alt='store'>
+                </div>
+                <div class='item-content'>
+                    <h3 class='item-title'>".$storename."</h3>
+                    <div class='ad-count'>".$addNumber." ad</div>
+                </div>
+            </a>
+        </div>
+    </div>
+        ";
+    }
+    ?>
+                    <div
+                        class="col-lg-12 <?php if (mysqli_num_rows($res) > 0) {
+                            echo "d-none";
+                        } else {
+                            echo "d-block";
+                        }?>">
+                        <div class="tab-content">
+
+                            <div class="" id="result-empty" data-bg-image="tassets/images/result_empty.png"
+                                style="background-image: url('tassets/images/result_empty.png');">
+                            </div>
+                            <h3 class="text-center text-secondary bg-light py-3">Empty</h3>
+
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/rasels-store-bd">
-                                <div class="item-logo">
-                                    <img src="/images/1668253837O9bW0.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Rasel&#039;s Store BD</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/khan-technology-printing-house">
-                                <div class="item-logo">
-                                    <img src="/images/1651344620EIm7l.jpg" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Khan Technology &amp; Printing House</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/trance-furniture">
-                                <div class="item-logo">
-                                    <img src="/images/1647671250TlZxf.jpg" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">TRANCE Furniture</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/tamanna-shop">
-                                <div class="item-logo">
-                                    <img src="/images/1647275055AGu6f.jpg" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Tamanna Shop</h3>
-                                    <div class="ad-count">1 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/stnbazar">
-                                <div class="item-logo">
-                                    <img src="/images/16472064341Fifv.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Stnbazar</h3>
-                                    <div class="ad-count">1 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/wooden-treasure">
-                                <div class="item-logo">
-                                    <img src="/images/1645879091ULmWM.jpeg" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Wooden treasure</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/sohojbuy">
-                                <div class="item-logo">
-                                    <img src="/images/1643998004KJah2.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">SohojBuy</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/tocart">
-                                <div class="item-logo">
-                                    <img src="/images/1643402418edgu5.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">ToCart</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/oqtopus">
-                                <div class="item-logo">
-                                    <img src="/images/1643202067PFMjZ.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">OQTOPUS</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/scarf-and-fashion">
-                                <div class="item-logo">
-                                    <img src="/images/1643196930ULBCF.jpeg" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Scarf and fashion</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/japan-auto-market">
-                                <div class="item-logo">
-                                    <img src="/images/16298108650I5lY.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Japan Auto Market</h3>
-                                    <div class="ad-count">3 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/priyostallbd">
-                                <div class="item-logo">
-                                    <img src="/images/1622209644rHA83.jpg" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">PriyoStallBD</h3>
-                                    <div class="ad-count">1 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/fm-home-applinces-bd">
-                                <div class="item-logo">
-                                    <img src="/images/1621154987GzWcO.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">FM Home Applinces BD</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/nuha-trendz">
-                                <div class="item-logo">
-                                    <img src="/images/1619870400wyihl.jpg" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Nuha Trendz</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6">
-                        <div class="store-list-layout1">
-                            <a href="https://www.prothomei.com/tarasee-arsa">
-                                <div class="item-logo">
-                                    <img src="/images/1615292167MgI8d.png" alt="store">
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">Tarasee Arsa</h3>
-                                    <div class="ad-count">0 ad</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+
+
                 </div>
 
             </div>
@@ -273,7 +115,7 @@
     </main>
 
     <?php
-    include("include/footer.php");
+       include("include/footer.php");
 
     ?>
 

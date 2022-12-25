@@ -1,3 +1,9 @@
+<?php
+    $storeid = $_GET['storeid'];
+    if (empty($storeid)) {
+        header("location: all-store.php");
+    }
+    ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,7 +16,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login - Rent2SellBD</title>
+    <title>Store Details - Rent2SellBD</title>
     <link rel="shortcut icon" type="image/x-icon" href="passets/img/favicon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,26 +57,44 @@
 
 <body class="sticky-header bg-accent" id="app">
     <?php
-          include("include/header.php");
+              include("include/header.php");
+    ?>
+    <?php
+    require("function/functions.php");
+    include("function/connection.php");
+    include("function/function.php");
     ?>
 
+    <?php
+    $storedetails=mysqli_fetch_array(mysqli_query($con, "select * from store where id=$storeid"));
+    ?>
     <!--=====================================-->
     <!--=          Store Banner Start       =-->
     <!--=====================================-->
     <section class="store-banner-wrap-layout1 bg-accent d-none d-md-block">
         <div class="container">
-            <div class="store-banner-box" data-bg-image="/images/16697374613eg7S.JPG">
+            <div class="store-banner-box" data-bg-image=<?php echo "images/storeimages/".$storedetails['StoreBanner'].""?>>
                 <div class="banner-content">
                     <div class="store-logo">
-                        <img src="/images/1669737461Qc0Y9.JPG" alt="RadiusTheme">
+                        <img
+                            src=<?php echo "images/storeimages/".$storedetails['StoreLogo'].""?>
+                        alt="<?php echo "".$storedetails['storeName'].""?>">
                     </div>
                     <div class="store-content">
-                        <h2 class="item-title">M/S Kabir Enterprise</h2>
-                        <div class="store-tagline">Good Product For Good User.</div>
+                        <h2 class="item-title">
+                            <?php echo "".$storedetails['storeName'].""?>
+                        </h2>
+                        <div class="store-tagline">
+                            <?php echo "".$storedetails['Slogan'].""?>
+                        </div>
                         <ul class="item-meta">
-                            <li><i class="fas fa-map-marker-alt"></i>Dhanshiri, 639-Ramchandrapur, Basar Road
-                                (Southern), Ghoramara, Boalia, Rajshahi, Bangladesh.</li>
-                            <li><i class="fas fa-user"></i>Member since - November, 29 2022</li>
+                            <li><i
+                                    class="fas fa-map-marker-alt"></i><?php echo "".$storedetails['Location'].""?>
+                            </li>
+                            <li><i class="fas fa-user"></i>Member since -
+                                <?php $yrdata= strtotime($storedetails['storeAddedTime']);
+    echo date('F, d Y', $yrdata);?>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -80,23 +104,30 @@
 
     <section class="store-banner-wrap-layout1 d-block d-md-none">
         <div class="container">
-            <img class="" src="/images/16697374613eg7S.JPG" alt="" class="">
+            <img class=""
+                src=<?php echo "images/storeimages/".$storedetails['StoreBanner'].""?>
+            alt="" class="">
             <div class="" style="">
                 <div class="banner-content d-flex">
                     <div class="store-logo py-2">
-                        <img class="bg-light" width="120px" src="/images/1669737461Qc0Y9.JPG" alt="RadiusTheme">
+                        <img class="bg-light" width="120px"
+                            src=<?php echo "images/storeimages/".$storedetails['StoreLogo'].""?>
+                        alt="<?php echo "".$storedetails['storeName'].""?>">
                     </div>
                     <div class="store-content p-2">
-                        <h4 class="item-title font-weight-bold mb-0" style="">M/S Kabir Enterprise</h4>
+                        <h4 class="item-title font-weight-bold mb-0" style="">
+                            <?php echo "".$storedetails['storeName'].""?>
+                        </h4>
                         <div class="d-flex flex-column">
                             <small class="item-title d-flex">
                                 <span><i class="fas fa-user fa-sm" style="color: #f85c70"></i></span>
-                                <span class="pl-2">Member since - November, 29 2022</span>
+                                <span class="pl-2">Member since - <?php $yrdata= strtotime($storedetails['storeAddedTime']);
+    echo date('F, d Y', $yrdata);?></span>
                             </small>
                             <small class="item-title d-flex">
                                 <span><i class="fas fa-map-marker-alt fa-sm" style="color: #f85c70"></i></span>
-                                <span class="pl-2">Dhanshiri, 639-Ramchandrapur, Basar Road (Southern), Ghoramara,
-                                    Boalia, Rajshahi, Bangladesh.</span>
+                                <span
+                                    class="pl-2"><?php echo "".$storedetails['Location'].""?></span>
                             </small>
                         </div>
                     </div>
@@ -112,6 +143,15 @@
         <div class="container">
             <div class="row">
 
+                <?php
+          $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
+    $limit = 9; //if you want to dispaly 10 records per page then you have to change here
+    $startpoint = ($page * $limit) - $limit;
+    $statement ="product"; //you have to pass your query over here
+    $res=mysqli_query($con, "select * from product where storeid=$storeid and publishtype='store'") or die("eRROR");
+    $totalcount=mysqli_num_rows(mysqli_query($con, "select * from store where id=$storeid"));
+    ?>
+
                 <div class="col-xl-9 col-lg-8">
                     <div class="product-filter-heading">
                         <div class="row align-items-center">
@@ -119,11 +159,10 @@
                             <div class="col-md-6">
                                 <h2 class="item-title">
                                     Showing
-                                    <span class="font-medium">1</span>
-                                    to
-                                    <span class="font-medium">5</span>
+                                    <?php echo $startpoint+1 ?> to
+                                    <?php echo ($totalcount > $limit) ? ($page >=2) ? (($page-1)*$limit) + ($totalcount - (($page-1)*$limit)) : ($page*$limit) : $totalcount  ?>
                                     of
-                                    <span class="font-medium">5</span>
+                                    <?php echo $totalcount ?>
                                     results
                                 </h2>
                             </div>
@@ -137,28 +176,31 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?title=asc">A to Z
+                                                <?php echo "href='store-view?storeid=$storeid&title=asc'"?>>A
+                                                to Z
                                                 (title)</a>
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?title=desc">Z to A
+                                                <?php echo "href='store-view?storeid=$storeid&title=desc'"?>>Z
+                                                to A
                                                 (title)</a>
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?date=asc">Data Added
+                                                <?php echo "href='store-view?storeid=$storeid&date=asc'"?>>Data
+                                                Added
                                                 (oldest)</a>
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?date=desc">Data
+                                                <?php echo "href='store-view?storeid=$storeid&date=desc'"?>>Data
                                                 Added (newest)</a>
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?view=desc">Most
+                                                <?php echo "href='store-view?storeid=$storeid&view=desc'"?>>Most
                                                 Viewed</a>
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?view=asc">Less
+                                                <?php echo "href='store-view?storeid=$storeid&view=asc'"?>>Less
                                                 Viewed</a>
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?price=asc">Price
+                                                <?php echo "href='store-view?storeid=$storeid&price=asc'"?>>Price
                                                 (low to high)</a>
                                             <a class="dropdown-item"
-                                                href="https://www.prothomei.com/ms-kabir-enterprise?price=desc">Price
+                                                <?php echo "href='store-view?storeid=$storeid&price=desc'"?>>Price
                                                 (high to low)</a>
                                         </div>
                                     </div>
@@ -184,573 +226,100 @@
                     <div id="product-view" class="product-box-grid">
                         <div class="row">
 
-                            <div class="col-xl-4 col-6 px-only-sm-1">
-                                <div class="product-grid-view">
-                                    <div class="grid-view-layout2">
-                                        <div class="product-box-layout1 pb-2   ">
-                                            <div class="">
-                                                <div class="item-img">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-v380-mini-hd-720p-ip-camera-two-way-intercomaudio-bd-543541"
-                                                        class=""><img src="/images/1671035308o00Sq.jpg"
-                                                            alt="Product"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="item-content py-0 px-1 px-sm-3">
-
-
-                                                <div class="item-tag d-none d-md-block"><a
-                                                        href="https://www.prothomei.com/ms-kabir-enterprise?category=4">Electronics</a>
-                                                </div>
-                                                <div class="item-price font-only-sm-1">
-                                                    <span class="currency-symbol">BDT</span> 1600<small> per peice
-                                                    </small>
-                                                </div>
-
-
-                                                <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                        href="https://www.prothomei.com/ad/view/prothomei-v380-mini-hd-720p-ip-camera-two-way-intercomaudio-bd-543541">V380
-                                                        Mini HD 720P IP Camera, Two Way Intercom/Audio BD</a></h3>
-                                                <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-
-                                                <ul class="entry-meta">
-                                                    <li class="d-none d-md-block"><i class="far fa-clock"></i>1 week ago
-                                                    </li>
-                                                    <li>
-                                                        <div class="text-truncate"><i class="fas fa-map-marker-alt"></i>
-                                                            Dhanshiri, 639-Ramchandrapur, Basar Road (Southern),
-                                                            Ghoramara, Boalia, Rajshahi, Bangladesh.</div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="d-none d-md-block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-list-view">
-                                    <div class="list-view-layout2">
-                                        <div class="product-box-layout3   ">
-                                            <div class="mr-3 ">
-                                                <div class="item-img mr-0">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-v380-mini-hd-720p-ip-camera-two-way-intercomaudio-bd-543541"
-                                                        class=""><img src="/images/1671035308o00Sq.jpg" alt="Product"
-                                                            style="object-position: top;"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="product-info">
-                                                <div class="item-content">
-
-
-
-                                                    <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-v380-mini-hd-720p-ip-camera-two-way-intercomaudio-bd-543541">V380
-                                                            Mini HD 720P IP Camera, Two Way Intercom/Audio BD</a></h3>
-                                                    <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-                                                    <div class="d-md-none">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 1600 <small> per
-                                                                peice </small>
-                                                        </div>
-                                                    </div>
-
-                                                    <ul class="entry-meta d-flex flex-column">
-                                                        <li class="my-0 d-none d-md-block"><i class="far fa-clock"></i>1
-                                                            week ago</li>
-                                                        <li class="my-0">
-                                                            <div class="text-truncate"><i
-                                                                    class="fas fa-map-marker-alt"></i> Dhanshiri,
-                                                                639-Ramchandrapur,...</div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="d-none d-md-block">
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="item-right">
-                                                    <div class="right-meta">
-                                                        <div class="d-none d-md-block">
-                                                            <span><i class="fas fa-shopping-cart"></i>Sell</span>
-                                                            <span><i class="far fa-eye"></i>0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-none d-md-block">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 1600 <br><small>
-                                                                per peice </small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-btn">
-                                                        <a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-v380-mini-hd-720p-ip-camera-two-way-intercomaudio-bd-543541">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-6 px-only-sm-1">
-                                <div class="product-grid-view">
-                                    <div class="grid-view-layout2">
-                                        <div class="product-box-layout1 pb-2   ">
-                                            <div class="">
-                                                <div class="item-img">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ax1800m-11ax-1775mbps-wireless-mesh-router-bd-919650"
-                                                        class=""><img src="/images/1671033710xtTwz.jpg"
-                                                            alt="Product"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="item-content py-0 px-1 px-sm-3">
-
-
-                                                <div class="item-tag d-none d-md-block"><a
-                                                        href="https://www.prothomei.com/ms-kabir-enterprise?category=4">Electronics</a>
-                                                </div>
-                                                <div class="item-price font-only-sm-1">
-                                                    <span class="currency-symbol">BDT</span> 9700<small> per peice
-                                                    </small>
-                                                </div>
-
-
-                                                <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                        href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ax1800m-11ax-1775mbps-wireless-mesh-router-bd-919650">Wi-Tek
-                                                        WI-AX1800M 11AX 1775Mbps Wireless Mesh Router BD</a></h3>
-                                                <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-
-                                                <ul class="entry-meta">
-                                                    <li class="d-none d-md-block"><i class="far fa-clock"></i>1 week ago
-                                                    </li>
-                                                    <li>
-                                                        <div class="text-truncate"><i class="fas fa-map-marker-alt"></i>
-                                                            Dhanshiri, 639-Ramchandrapur, Basar Road (Southern),
-                                                            Ghoramara, Boalia, Rajshahi, Bangladesh.</div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="d-none d-md-block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-list-view">
-                                    <div class="list-view-layout2">
-                                        <div class="product-box-layout3   ">
-                                            <div class="mr-3 ">
-                                                <div class="item-img mr-0">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ax1800m-11ax-1775mbps-wireless-mesh-router-bd-919650"
-                                                        class=""><img src="/images/1671033710xtTwz.jpg" alt="Product"
-                                                            style="object-position: top;"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="product-info">
-                                                <div class="item-content">
-
-
-
-                                                    <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ax1800m-11ax-1775mbps-wireless-mesh-router-bd-919650">Wi-Tek
-                                                            WI-AX1800M 11AX 1775Mbps Wireless Mesh Router BD</a></h3>
-                                                    <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-                                                    <div class="d-md-none">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 9700 <small> per
-                                                                peice </small>
-                                                        </div>
-                                                    </div>
-
-                                                    <ul class="entry-meta d-flex flex-column">
-                                                        <li class="my-0 d-none d-md-block"><i class="far fa-clock"></i>1
-                                                            week ago</li>
-                                                        <li class="my-0">
-                                                            <div class="text-truncate"><i
-                                                                    class="fas fa-map-marker-alt"></i> Dhanshiri,
-                                                                639-Ramchandrapur,...</div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="d-none d-md-block">
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="item-right">
-                                                    <div class="right-meta">
-                                                        <div class="d-none d-md-block">
-                                                            <span><i class="fas fa-shopping-cart"></i>Sell</span>
-                                                            <span><i class="far fa-eye"></i>0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-none d-md-block">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 9700 <br><small>
-                                                                per peice </small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-btn">
-                                                        <a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ax1800m-11ax-1775mbps-wireless-mesh-router-bd-919650">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-6 px-only-sm-1">
-                                <div class="product-grid-view">
-                                    <div class="grid-view-layout2">
-                                        <div class="product-box-layout1 pb-2   ">
-                                            <div class="">
-                                                <div class="item-img">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-srihome-3mp-color-night-vision-waterproof-wireless-outdoor-ptz-ip-camera-with-audible-alarm-bd-963860"
-                                                        class=""><img src="/images/1671001043pbo1a.jpg"
-                                                            alt="Product"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="item-content py-0 px-1 px-sm-3">
-
-
-                                                <div class="item-tag d-none d-md-block"><a
-                                                        href="https://www.prothomei.com/ms-kabir-enterprise?category=4">Electronics</a>
-                                                </div>
-                                                <div class="item-price font-only-sm-1">
-                                                    <span class="currency-symbol">BDT</span> 4000<small> per peice
-                                                    </small>
-                                                </div>
-
-
-                                                <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                        href="https://www.prothomei.com/ad/view/prothomei-srihome-3mp-color-night-vision-waterproof-wireless-outdoor-ptz-ip-camera-with-audible-alarm-bd-963860">SriHome
-                                                        3Mp Color Night Vision Waterproof Wireless Outdoor PTZ IP Camera
-                                                        With Audible Alarm BD</a></h3>
-                                                <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-
-                                                <ul class="entry-meta">
-                                                    <li class="d-none d-md-block"><i class="far fa-clock"></i>1 week ago
-                                                    </li>
-                                                    <li>
-                                                        <div class="text-truncate"><i class="fas fa-map-marker-alt"></i>
-                                                            Dhanshiri, 639-Ramchandrapur, Basar Road (Southern),
-                                                            Ghoramara, Boalia, Rajshahi, Bangladesh.</div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="d-none d-md-block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-list-view">
-                                    <div class="list-view-layout2">
-                                        <div class="product-box-layout3   ">
-                                            <div class="mr-3 ">
-                                                <div class="item-img mr-0">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-srihome-3mp-color-night-vision-waterproof-wireless-outdoor-ptz-ip-camera-with-audible-alarm-bd-963860"
-                                                        class=""><img src="/images/1671001043pbo1a.jpg" alt="Product"
-                                                            style="object-position: top;"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="product-info">
-                                                <div class="item-content">
-
-
-
-                                                    <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-srihome-3mp-color-night-vision-waterproof-wireless-outdoor-ptz-ip-camera-with-audible-alarm-bd-963860">SriHome
-                                                            3Mp Color Night Vision Waterproof Wireless Outdoor PTZ IP
-                                                            Camera With Au...</a></h3>
-                                                    <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-                                                    <div class="d-md-none">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 4000 <small> per
-                                                                peice </small>
-                                                        </div>
-                                                    </div>
-
-                                                    <ul class="entry-meta d-flex flex-column">
-                                                        <li class="my-0 d-none d-md-block"><i class="far fa-clock"></i>1
-                                                            week ago</li>
-                                                        <li class="my-0">
-                                                            <div class="text-truncate"><i
-                                                                    class="fas fa-map-marker-alt"></i> Dhanshiri,
-                                                                639-Ramchandrapur,...</div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="d-none d-md-block">
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="item-right">
-                                                    <div class="right-meta">
-                                                        <div class="d-none d-md-block">
-                                                            <span><i class="fas fa-shopping-cart"></i>Sell</span>
-                                                            <span><i class="far fa-eye"></i>0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-none d-md-block">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 4000 <br><small>
-                                                                per peice </small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-btn">
-                                                        <a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-srihome-3mp-color-night-vision-waterproof-wireless-outdoor-ptz-ip-camera-with-audible-alarm-bd-963860">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-6 px-only-sm-1">
-                                <div class="product-grid-view">
-                                    <div class="grid-view-layout2">
-                                        <div class="product-box-layout1 pb-2   ">
-                                            <div class="">
-                                                <div class="item-img">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ap315-11ac-750mbps-outdoor-access-point-bd-713003"
-                                                        class=""><img src="/images/1670998477WmGLq.png"
-                                                            alt="Product"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="item-content py-0 px-1 px-sm-3">
-
-
-                                                <div class="item-tag d-none d-md-block"><a
-                                                        href="https://www.prothomei.com/ms-kabir-enterprise?category=4">Electronics</a>
-                                                </div>
-                                                <div class="item-price font-only-sm-1">
-                                                    <span class="currency-symbol">BDT</span> 10200<small> per peice
-                                                    </small>
-                                                </div>
-
-
-                                                <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                        href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ap315-11ac-750mbps-outdoor-access-point-bd-713003">Wi-Tek
-                                                        WI-AP315 11AC 750Mbps Outdoor Access Point BD</a></h3>
-                                                <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-
-                                                <ul class="entry-meta">
-                                                    <li class="d-none d-md-block"><i class="far fa-clock"></i>1 week ago
-                                                    </li>
-                                                    <li>
-                                                        <div class="text-truncate"><i class="fas fa-map-marker-alt"></i>
-                                                            Dhanshiri, 639-Ramchandrapur, Basar Road (Southern),
-                                                            Ghoramara, Boalia, Rajshahi, Bangladesh.</div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="d-none d-md-block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-list-view">
-                                    <div class="list-view-layout2">
-                                        <div class="product-box-layout3   ">
-                                            <div class="mr-3 ">
-                                                <div class="item-img mr-0">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ap315-11ac-750mbps-outdoor-access-point-bd-713003"
-                                                        class=""><img src="/images/1670998477WmGLq.png" alt="Product"
-                                                            style="object-position: top;"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="product-info">
-                                                <div class="item-content">
-
-
-
-                                                    <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ap315-11ac-750mbps-outdoor-access-point-bd-713003">Wi-Tek
-                                                            WI-AP315 11AC 750Mbps Outdoor Access Point BD</a></h3>
-                                                    <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-                                                    <div class="d-md-none">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 10200 <small> per
-                                                                peice </small>
-                                                        </div>
-                                                    </div>
-
-                                                    <ul class="entry-meta d-flex flex-column">
-                                                        <li class="my-0 d-none d-md-block"><i class="far fa-clock"></i>1
-                                                            week ago</li>
-                                                        <li class="my-0">
-                                                            <div class="text-truncate"><i
-                                                                    class="fas fa-map-marker-alt"></i> Dhanshiri,
-                                                                639-Ramchandrapur,...</div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="d-none d-md-block">
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="item-right">
-                                                    <div class="right-meta">
-                                                        <div class="d-none d-md-block">
-                                                            <span><i class="fas fa-shopping-cart"></i>Sell</span>
-                                                            <span><i class="far fa-eye"></i>0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-none d-md-block">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 10200 <br><small>
-                                                                per peice </small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-btn">
-                                                        <a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-wi-tek-wi-ap315-11ac-750mbps-outdoor-access-point-bd-713003">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-6 px-only-sm-1">
-                                <div class="product-grid-view">
-                                    <div class="grid-view-layout2">
-                                        <div class="product-box-layout1 pb-2   ">
-                                            <div class="">
-                                                <div class="item-img">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-srihome-sh038-wireless-ip-camera-bd-934207"
-                                                        class=""><img src="/images/16700458849w9uf.jpg"
-                                                            alt="Product"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="item-content py-0 px-1 px-sm-3">
-
-
-                                                <div class="item-tag d-none d-md-block"><a
-                                                        href="https://www.prothomei.com/ms-kabir-enterprise?category=4">Electronics</a>
-                                                </div>
-                                                <div class="item-price font-only-sm-1">
-                                                    <span class="currency-symbol">BDT</span> 3000<small> per peice
-                                                    </small>
-                                                </div>
-
-
-                                                <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                        href="https://www.prothomei.com/ad/view/prothomei-srihome-sh038-wireless-ip-camera-bd-934207">SriHome
-                                                        SH038 Wireless IP Camera BD</a></h3>
-                                                <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-
-                                                <ul class="entry-meta">
-                                                    <li class="d-none d-md-block"><i class="far fa-clock"></i>3 weeks
-                                                        ago</li>
-                                                    <li>
-                                                        <div class="text-truncate"><i class="fas fa-map-marker-alt"></i>
-                                                            Dhanshiri, 639-Ramchandrapur, Basar Road (Southern),
-                                                            Ghoramara, Boalia, Rajshahi, Bangladesh.</div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="d-none d-md-block">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-list-view">
-                                    <div class="list-view-layout2">
-                                        <div class="product-box-layout3   ">
-                                            <div class="mr-3 ">
-                                                <div class="item-img mr-0">
-                                                    <a href="https://www.prothomei.com/ad/view/prothomei-srihome-sh038-wireless-ip-camera-bd-934207"
-                                                        class=""><img src="/images/16700458849w9uf.jpg" alt="Product"
-                                                            style="object-position: top;"></a>
-                                                </div>
-                                            </div>
-
-                                            <div class="product-info">
-                                                <div class="item-content">
-
-
-
-                                                    <h3 class="item-title mb-0 font-only-sm-1"><a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-srihome-sh038-wireless-ip-camera-bd-934207">SriHome
-                                                            SH038 Wireless IP Camera BD</a></h3>
-                                                    <h3 class="item-title mb-0"><span class="ml-0">new</span></h3>
-
-                                                    <div class="d-md-none">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 3000 <small> per
-                                                                peice </small>
-                                                        </div>
-                                                    </div>
-
-                                                    <ul class="entry-meta d-flex flex-column">
-                                                        <li class="my-0 d-none d-md-block"><i class="far fa-clock"></i>3
-                                                            weeks ago</li>
-                                                        <li class="my-0">
-                                                            <div class="text-truncate"><i
-                                                                    class="fas fa-map-marker-alt"></i> Dhanshiri,
-                                                                639-Ramchandrapur,...</div>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="d-none d-md-block">
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="item-right">
-                                                    <div class="right-meta">
-                                                        <div class="d-none d-md-block">
-                                                            <span><i class="fas fa-shopping-cart"></i>Sell</span>
-                                                            <span><i class="far fa-eye"></i>8</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-none d-md-block">
-                                                        <div class="item-price mb-0">
-                                                            <span class="currency-symbol">BDT</span> 3000 <br><small>
-                                                                per peice </small>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-btn">
-                                                        <a
-                                                            href="https://www.prothomei.com/ad/view/prothomei-srihome-sh038-wireless-ip-camera-bd-934207">Details</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <?php
+
+while ($row=mysqli_fetch_array($res)) {
+    $catagoryid = $row['categoryid'];
+    $subareaid = $row['subareaid'];
+    $catagory=mysqli_query($con, "select categoryname from category where id = $catagoryid") or die("eRROR");
+    $catagoryrow=mysqli_fetch_array($catagory);
+
+    $subarea=mysqli_query($con, "select subareaname from subarea where id = $subareaid") or die("eRROR");
+    $subarearow=mysqli_fetch_array($subarea);
+
+    $datetime1 = date_create($row['adddate']);
+    $datetime2 = date_create(date("y-m-d h:i:s"));
+    $interval = date_diff($datetime1, $datetime2);
+    echo "<div class='col-xl-4  col-6 px-only-sm-1'>
+            <div class='product-grid-view'>
+            <div class='grid-view-layout2'>
+                <div class='product-box-layout1 pb-2'>
+                    <div class=''>
+                        <div class='item-img'>
+                        <a href='itemDetails.php?details=".$row['id']."' class=''><img src='images/adsimages/".$row['image0']."' alt='Product'></a>
+                    </div>
+                </div>
+                <div class='item-content py-0 px-1 px-sm-3'>
+                    <div class='item-tag d-none d-md-block'><a href='catWiseItems?id=".$row['categoryid']."'>".$catagoryrow['categoryname']."</a></div>
+                    <div class='item-price font-only-sm-1'>
+                        <span class='currency-symbol'>BDT </span>".$row['price']."<small> </small>
+                    </div>
+                    <h3 class='item-title mb-0 font-only-sm-1'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
+                
+                    <ul class='entry-meta'>
+                        <li class='d-none d-md-block'><i class='far fa-clock'></i>".$interval->format('%m')." months ago</li>
+                        <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i>". ucfirst($subarearow['subareaname'])."</div></li>
+                    </ul>
+
+                    <div class='d-none d-md-block'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='product-list-view'>
+    <div class='list-view-layout2'>
+        <div class='product-box-layout3'>
+            <div class='mr-3 '>
+                <div class='item-img mr-0'>
+                    <a href='itemDetails.php?details=".$row['id']."' class=''> <img src='images/adsimages/".$row['image0']."' alt='Product' style='object-position: top;'></a>
+                </div>
+            </div>
+
+            <div class='product-info'>
+                <div class='item-content'>
+
+                    <h3 class='item-title mb-0 font-only-sm-1'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
+                    
+                    <div class='d-md-none'>
+                        <div class='item-price mb-0'>
+                            <span class='currency-symbol'>BDT </span>".$row['price']."<small> </small>
+                        </div>
+                    </div>
+
+                    <ul class='entry-meta d-flex flex-column'>
+                        <li class='my-0 d-none d-md-block'><i class='far fa-clock'></i>6 months ago</li>
+                        <li class='my-0'><div class='text-truncate'><i class='fas fa-map-marker-alt'></i> Dhaka</div></li>
+                    </ul>
+
+                    <div class='d-none d-md-block'>
+                    </div>
+
+                    
+                </div>
+                <div class='item-right'>
+                    <div class='right-meta'>
+                        <div class='d-none d-md-block'>
+                            <span><i class='fas fa-shopping-cart'></i>Sell</span>
+                            <span><i class='far fa-eye'></i>17</span>
+                        </div>
+                    </div>
+                    <div class='d-none d-md-block'>
+                        <div class='item-price mb-0'>
+                            <span class='currency-symbol'>BDT </span>".$row['price']."<br><small> </small>
+                        </div>
+                    </div>
+                    <div class='item-btn'>
+                        <a href='itemDetails.php?details=".$row['id']."'>Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>";
+}
+    ?>
 
                         </div>
                     </div>
@@ -762,29 +331,34 @@
                     <div class="widget-lg widget-store-detail widget-light-bg">
                         <h3 class="widget-border-title">Details</h3>
                         <div class="store-content">
-                            <p>PABX, Broadband Internet &amp; Wi-Fi Networking, FTTH, CCTV Camera, Access Control
-                                Management Accessories Supply and Solution Provider.</p>
+                            <p><?php echo $storedetails['Description'] ?>
+                            </p>
                         </div>
                     </div>
                     <div class="widget-lg widget-author-info widget-store-info widget-light-bg">
                         <h3 class="widget-border-title">Store Information</h3>
                         <div class="author-content">
                             <div class="store-website">
-                                <a
-                                    href="https://ms-kabir-enterprise.business.site/?utm_source=gmb&amp;utm_medium=referral"><i
+                                <a target="_blank"
+                                    href="<?php echo $storedetails['Website'] ?>"><i
                                         class="fas fa-globe-asia"></i>Visit Website</a>
                             </div>
                             <div class="store-opening-hour">
                                 <span class="item-title"><i class="far fa-clock"></i>Opening Hours</span>
-                                <ul class="pl-3">
+                                <?php if ($storedetails['OpeningHours'] == "always-open") {
+                                    echo "<span class='pl-3'>Always Open</span>";
+                                } else {
+                                    echo " <ul class='pl-3'>
                                     <li>
-                                        <span>09:00 AM</span>
+                                        <span>".date('h:i A', strtotime($storedetails['openingHourStart']))."</span>
                                         to
-                                        <span class="pl-2">07:00 PM</span>
+                                        <span class='pl-2'>".date('h:i A', strtotime($storedetails['openingHourEnd']))."</span>
                                     </li>
-                                </ul>
+                                </ul>";
+                                } ?>
                             </div>
-                            <div class="phone-number classima-phone-reveal not-revealed" data-phone="+8801716164917">
+                            <div class="phone-number classima-phone-reveal not-revealed"
+                                data-phone="<?php echo $storedetails['Mobile'] ?>">
                                 <div class="number"><i class="fas fa-phone"></i><span>01XXX-XXXXXX</span></div>
                                 <div class="item-text">Click to reveal phone number</div>
                             </div>
@@ -792,7 +366,7 @@
                                 <a href="#" class="mail-btn" data-toggle="modal" data-target="#author-mail">
                                     <i class="fas fa-envelope"></i>Email
                                 </a>
-                                <a href="https://www.prothomei.com/live-chat/2569" class="mail-btn mt-2">
+                                <a href="live-chat/2569" class="mail-btn mt-2">
                                     <i class="fas fa-comment"></i>Live chat
                                 </a>
                             </div>
@@ -816,7 +390,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="https://www.prothomei.com/contact2/mail-to-store-seller/16" method="POST">
+                    <form action="contact2/mail-to-store-seller/16" method="POST">
                         <input type="hidden" name="_token" value="Dsojvlt9Tq0RzsCJEaQ64DZBTrGL5Z4foS5SijHE"> <input
                             type="hidden" name="_method" value="POST">
                         <div class="form-group">
@@ -846,7 +420,7 @@
     </div>
 
     <?php
-        include("include/footer.php");
+            include("include/footer.php");
 
     ?>
 

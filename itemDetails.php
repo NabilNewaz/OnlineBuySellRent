@@ -471,6 +471,26 @@ if (isset($_GET["details"])) {
                      text-shadow: 0 0 5px #09f;
                   }
                </style>
+               <div class="item-review light-shadow-bg pb-4 pb-lg-5">
+                  <h3 class="widget-border-title">Reviews</h3>
+                  <div class="light-box-content">
+                     <div class="py-3 border-bottom">
+                        <div class="d-flex">
+                           <img class=" rounded-circle" src="/images/1644318068BtqHn.jpg" alt=""
+                              style="width: 30px; height: 30px">
+                           <h6 class="px-2 font-weight-bold">Nabil Newaz</h6>
+                        </div>
+                        <div class="px-2">
+                           <small>Rating 5 <i class="far fa-star text-warning"></i></small>
+                        </div>
+                        <div class="px-2 bg-light rounded">
+                           <strong class="text-secondary pb-0 mb-0">valo</strong>
+                           <p>valo</p>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
                <div class="item-related-product light-shadow-bg pb-4 pb-lg-5">
                   <div class="flex-heading-layout2">
                      <h3 class="widget-border-title">Related Ads</h3>
