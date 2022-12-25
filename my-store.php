@@ -5,6 +5,9 @@ session_start();
 if (!(isset($_SESSION['username']))) {
     header("location: login.php?referer=my-store");
 }
+// if ($_SESSION['form_submit'] == true) {
+//     header("location: my-store.php");
+// }
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -70,6 +73,23 @@ if (!(isset($_SESSION['username']))) {
 include "include/header.php";
 ?>
 
+
+        <?php
+        require("function/functions.php");
+include("function/connection.php");
+include("function/function.php");
+?>
+
+        <?php
+$db =$con;
+$userid =$_SESSION['id'];
+$store_details=mysqli_query($con, "select * from store where storeUserId = $userid") or die("eRROR");
+$storerow=mysqli_fetch_array($store_details);
+
+// $store_details = $db->query("SELECT * FROM store where storeUserId = '$userid' ");
+// $storerow = mysqli_num_rows($store_details);
+?>
+
         <main class="">
             <section class="py-3 bg-accent">
                 <div class="container">
@@ -120,11 +140,11 @@ include "include/header.php";
                                 <div class="" id="store">
                                     <div class="light-shadow-bg post-ad-box-layout1 myaccount-store-settings">
                                         <div class="light-box-content">
-                                            <form action="/user/profile/store/update" method="POST"
-                                                enctype="multipart/form-data">
-                                                <input type="hidden" name="_token"
-                                                    value="VIQvDKnj7ZyiIHY7DnPTwvKN0f8HDYiWZ0eL1hUw"> <input
-                                                    type="hidden" name="_method" value="PUT">
+                                            <form id="create-store" action="" method="post"
+                                                enctype="multipart/form-data" class="form-group">
+                                                <input class="form-control"
+                                                    value="<?php echo $_SESSION['id']; ?>"
+                                                    type="hidden" name="uid" id="uid">
                                                 <div class="post-section store-banner">
                                                     <div class="post-ad-title">
                                                         <i class="far fa-image"></i>
@@ -140,13 +160,19 @@ include "include/header.php";
                                                             <div class="form-group">
                                                                 <div class="store-banner-wrapper">
                                                                     <div class="banenr-img">
-                                                                        <img src="tassets/images/default_store_banner.jpg"
-                                                                            alt="Store Banner">
+                                                                        <img id=store-banner-img <?php if ($storerow > 0) {
+                                                                            echo "src=images/storeimages/".$storerow['StoreBanner']."";
+                                                                        } else {
+                                                                            echo 'src="tassets/images/default_store_banner.jpg"' ;
+                                                                        } ?>
+                                                                        alt="Store Banner">
                                                                     </div>
                                                                     <input type="file" name="banner" id="banner"
-                                                                        class=" form-control-sm d-flex" required>
+                                                                        class=" form-control-sm d-flex" required
+                                                                        onchange='showPreview(event, "store-banner-img");'>
                                                                     <div class="alert alert-danger"> Recommended banner
-                                                                        size to (1180x300)px </div>
+                                                                        size to (1180x300)px
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -161,10 +187,16 @@ include "include/header.php";
                                                             <div class="form-group">
                                                                 <div class="store-banner-wrapper">
                                                                     <div class="banenr-img">
-                                                                        <img src="/images/default_store_logo.png"
-                                                                            alt="Store Banner" width="100">
+                                                                        <img id=store-logo-img <?php if ($storerow > 0) {
+                                                                            echo "src=images/storeimages/".$storerow['StoreLogo']."";
+                                                                        } else {
+                                                                            echo 'src="tassets/images/default_store_banner.jpg"' ;
+                                                                        } ?>
+                                                                        alt="Store Banner" width="100">
                                                                     </div>
-                                                                    <input type="file" name="logo" id="logo"
+                                                                    <input
+                                                                        onchange='showPreview(event, "store-logo-img");'
+                                                                        type="file" name="logo" id="logo"
                                                                         class="form-control-sm d-flex" required>
                                                                     <div class="alert alert-danger">Recommended logo
                                                                         size to (180x140)px </div>
@@ -188,18 +220,28 @@ include "include/header.php";
                                                             <div class="form-group">
                                                                 <div class="form-check form-radio-btn">
                                                                     <input class="form-check-input" type="radio"
-                                                                        id="always_open" name="always_open"
-                                                                        value="always-open"
-                                                                        onclick="document.getElementById('custome-schedule-time').style.display = 'none'">
+                                                                        id="always_open" name="opening_hours"
+                                                                        value="always-open" <?php if ($storerow > 0) {
+                                                                            if ($storerow['OpeningHours'] == 'always-open') {
+                                                                                echo checked;
+                                                                            }
+                                                                        } ?>
+                                                                    onclick="document.getElementById('custome-schedule-time').style.display
+                                                                    = 'none'">
                                                                     <label class="form-check-label" for="always_open">
                                                                         Always open
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-check form-radio-btn">
                                                                     <input class="form-check-input" type="radio"
-                                                                        id="custome_schedule" name="always_open"
-                                                                        value="custome-schedule"
-                                                                        onclick="document.getElementById('custome-schedule-time').style.display = 'block'">
+                                                                        id="custome_schedule" name="opening_hours"
+                                                                        value="custome-schedule" <?php if ($storerow > 0) {
+                                                                            if ($storerow['OpeningHours'] == 'custome-schedule') {
+                                                                                echo checked;
+                                                                            }
+                                                                        } ?>
+                                                                    onclick="document.getElementById('custome-schedule-time').style.display
+                                                                    = 'block'">
                                                                     <label class="form-check-label"
                                                                         for="custome_schedule">
                                                                         Custom schedule
@@ -211,11 +253,23 @@ include "include/header.php";
                                                                 <div class="row justify-content-center">
                                                                     <input type="time" class="form-control col-5"
                                                                         name="opening_hour_start"
-                                                                        id="opening_hour_start" value="09:30">
+                                                                        id="opening_hour_start" value=<?php if ($storerow > 0) {
+                                                                            if ($storerow['OpeningHours'] == 'custome-schedule') {
+                                                                                echo $storerow['openingHourStart'];
+                                                                            }
+                                                                        } else {
+                                                                            echo "09:30";
+                                                                        } ?>>
                                                                     <div class="col-1">To</div>
                                                                     <input type="time" class="form-control col-5"
                                                                         name="opening_hour_end" id="opening_hour_end"
-                                                                        value="21:00">
+                                                                        value="<?php if ($storerow > 0) {
+                                                                            if ($storerow['OpeningHours'] == 'custome-schedule') {
+                                                                                echo $storerow['openingHourEnd'];
+                                                                            }
+                                                                        } else {
+                                                                            echo "21:00";
+                                                                        } ?>">
                                                                 </div>
                                                             </div>
                                                             <script>
@@ -242,7 +296,14 @@ include "include/header.php";
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control " name="name"
-                                                                    id="name" required value="">
+                                                                    <?php if ($storerow <= 0) {
+                                                                        echo "required";
+                                                                    } ?>
+                                                                id="name" required value="<?php if ($storerow > 0) {
+                                                                    echo $storerow['storeName'];
+                                                                } else {
+                                                                    echo "";
+                                                                } ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,11 +315,15 @@ include "include/header.php";
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control " name="slogan"
-                                                                    id="slogan" value="">
+                                                                    id="slogan" value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['Slogan'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    <!-- 
                                                     <div class="row">
                                                         <div class="col-sm-3">
                                                             <label for="country" class="control-label">Country
@@ -277,7 +342,7 @@ include "include/header.php";
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
 
                                                     <div class="row">
                                                         <div class="col-sm-3">
@@ -286,13 +351,15 @@ include "include/header.php";
                                                         </div>
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
-                                                                <textarea name=location id=location
+                                                                <textarea name="location" id="location"
                                                                     class="form-control textarea " cols="30" rows="5"
-                                                                    required></textarea>
-
-
-
-
+                                                                    <?php if ($storerow <= 0) {
+                                                                        echo "required";
+                                                                    } ?>><?php if ($storerow > 0) {
+                                                                        echo $storerow['Location'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -304,7 +371,11 @@ include "include/header.php";
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
                                                                 <input type="url" class="form-control " name="website"
-                                                                    id="website" value="">
+                                                                    id="website" value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['Website'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -317,7 +388,13 @@ include "include/header.php";
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
                                                                 <input type="tel" class="form-control " name="mobile"
-                                                                    id="mobile" required value="">
+                                                                    id="mobile" <?php if ($storerow <= 0) {
+                                                                        echo "required";
+                                                                    } ?> value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['Mobile'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -330,7 +407,13 @@ include "include/header.php";
                                                         <div class="col-sm-9">
                                                             <div class="form-group">
                                                                 <input type="email" class="form-control " name="email"
-                                                                    id="email" required value="">
+                                                                    id="email" <?php if ($storerow <= 0) {
+                                                                        echo "required";
+                                                                    } ?> value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['Email'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -344,11 +427,11 @@ include "include/header.php";
                                                             <div class="form-group">
                                                                 <textarea name=description id=description
                                                                     class="form-control textarea " cols="30" rows="5"
-                                                                    required></textarea>
-
-
-
-
+                                                                    required><?php if ($storerow > 0) {
+                                                                        echo $storerow['Description'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -362,24 +445,56 @@ include "include/header.php";
                                                         <div class="col-sm-9">
                                                             <div class="form-group store-social">
                                                                 <input type="url" class="form-control " name="facebook"
-                                                                    id="facebook" placeholder="Facebook" value="">
+                                                                    id="facebook" placeholder="Facebook" value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['facebook'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
 
                                                                 <input type="url" class="form-control " name="twitter"
-                                                                    id="twitter" placeholder="Twitter" value="">
+                                                                    id="twitter" placeholder="Twitter" value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['twitter'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
 
                                                                 <input type="url" class="form-control " name="linkedin"
-                                                                    id="linkedin" placeholder="Linkedin" value="">
+                                                                    id="linkedin" placeholder="Linkedin" value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['linkedin'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
 
                                                                 <input type="url" class="form-control " name="youtube"
-                                                                    id="youtube" placeholder="Youtube" value="">
+                                                                    id="youtube" placeholder="Youtube" value="<?php if ($storerow > 0) {
+                                                                        echo $storerow['youtube'];
+                                                                    } else {
+                                                                        echo "";
+                                                                    } ?>">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="post-section post-contact">
+                                                    <div class="post-section post-contact <?php if ($storerow > 0) {
+                                                        echo "d-none";
+                                                    } else {
+                                                        echo "d-block";
+                                                    } ?>">
                                                         <div class=text-center>
                                                             <div class="form-group">
-                                                                <input type="submit" class="submit-btn"
-                                                                    value="Create Store">
+                                                                <input type="submit" value="Add Store"
+                                                                    name="create-submit" class="submit-btn">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post-section post-contact <?php if ($storerow > 0) {
+                                                        echo "d-block";
+                                                    } else {
+                                                        echo "d-none";
+                                                    } ?>">
+                                                        <div class=text-center>
+                                                            <div class="form-group">
+                                                                <input type="submit" value="Update Store"
+                                                                    name="update-submit" class="submit-btn">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -394,14 +509,149 @@ include "include/header.php";
                     </div>
                 </div>
             </section>
+            </p>
         </main>
 
+        <script type="text/javascript">
+            function showPreview(event, id) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById(id);
+                    preview.src = src;
+                    preview.style.display = "block";
+                }
+            }
+        </script>
+
         <?php
-    include("include/footer.php");
+include("include/footer.php");
+?>
+        <script src="js/sweetalert.all.js"></script>
+        <?php
+        if ($_SESSION['store_form_submit'] == 'true') {
+            echo '<script>
+            Swal.fire({"title":"Store Added Successfully","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
+         </script>';
+            $_SESSION['store_form_submit']='fasle';
+        }
+
+        if ($_SESSION['store_update_form_submit'] == 'true') {
+            echo '<script>
+            Swal.fire({"title":"Store Updated Successfully","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
+         </script>';
+            $_SESSION['store_update_form_submit']='fasle';
+        }
+?>
+        <?php
+   if (isset($_POST['create-submit'])) {
+       $db =$con;
+       $userid =$_POST['uid'];
+       $check_store = $db->query("SELECT storeUserId FROM store where storeUserId = '$userid' ");
+       if (mysqli_num_rows($check_store) > 0) {
+           echo '<script>
+           Swal.fire({"title":"Store Already Added","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"error","position":"top-end"});
+        </script>';
+       } else {
+        //    $_SESSION['form_submit']='true';
+           $banner = $_FILES['banner']['name'];
+           move_uploaded_file(
+               $_FILES['banner']['tmp_name'],
+               "images/storeimages/".$_FILES['banner']['name']
+           );
+           $logo = $_FILES['logo']['name'];
+           move_uploaded_file(
+               $_FILES['logo']['tmp_name'],
+               "images/storeimages/".$_FILES['logo']['name']
+           );
+           $openinghours =$_POST['opening_hours'];
+           $openinghourstart =$_POST['opening_hour_start'];
+           $openinghourend =$_POST['opening_hour_end'];
+           $storename =$_POST['name'];
+           $slogan =$_POST['slogan'];
+           $location =$_POST['location'];
+           $website =$_POST['website'];
+           $mobile =$_POST['mobile'];
+           $email = $_POST['email'];
+           $description=$_POST['description'];
+           $facebook =$_POST['facebook'];
+           $twitter =$_POST['twitter'];
+           $linkedin =$_POST['linkedin'];
+           $youtube =$_POST['youtube'];
+
+     //    (`id`, `user_id`, `title`, `description`, `price`, `image`, `areaid`, `subareaid`, `categoryid`, `subcategoryid`, `adtype`, `condition`, `expiredate`)
+           $upadate = "UPDATE users SET storeid = $userid WHERE id = $userid";
+           $db->query($upadate);
+           $insertdata = "INSERT INTO `buynsell`.`store` VALUES ('', '$userid', '$banner', '$logo', '$openinghours', '$openinghourstart', '$openinghourend', '$storename','$slogan','$location','$website','$mobile','$email', '$description', '$facebook', '$twitter', '$linkedin', '$youtube')";
+           $result = $db->query($insertdata);
+           if ($result) {
+               $_SESSION['store_form_submit']='true';
+               echo '<script>
+         Swal.fire({"title":"Store Updated Successfully","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
+         window.location = "my-store.php";
+      </script>';
+           } else {
+               echo '<script>
+         Swal.fire({"title":"Store Not Added","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"error","position":"top-end"});
+      </script>';
+           }
+           $db->close();
+       }
+   }
+
+?>
+
+        <?php
+   if (isset($_POST['update-submit'])) {
+       $db =$con;
+       $userid =$_POST['uid'];
+       $banner = $_FILES['banner']['name'];
+       move_uploaded_file(
+           $_FILES['banner']['tmp_name'],
+           "images/storeimages/".$_FILES['banner']['name']
+       );
+       $logo = $_FILES['logo']['name'];
+       move_uploaded_file(
+           $_FILES['logo']['tmp_name'],
+           "images/storeimages/".$_FILES['logo']['name']
+       );
+       $openinghours =$_POST['opening_hours'];
+       $openinghourstart =$_POST['opening_hour_start'];
+       $openinghourend =$_POST['opening_hour_end'];
+       $storename =$_POST['name'];
+       $slogan =$_POST['slogan'];
+       $location =$_POST['location'];
+       $website =$_POST['website'];
+       $mobile =$_POST['mobile'];
+       $email = $_POST['email'];
+       $description=$_POST['description'];
+       $facebook =$_POST['facebook'];
+       $twitter =$_POST['twitter'];
+       $linkedin =$_POST['linkedin'];
+       $youtube =$_POST['youtube'];
+
+     //    (`id`, `user_id`, `title`, `description`, `price`, `image`, `areaid`, `subareaid`, `categoryid`, `subcategoryid`, `adtype`, `condition`, `expiredate`)
+       $upadate = "UPDATE users SET storeid = $userid WHERE id = $userid";
+       $db->query($upadate);
+       $updatetdata = "UPDATE store SET StoreBanner = '$banner', StoreLogo = '$logo', OpeningHours = '$openinghours', openingHourStart = '$openinghourstart', openingHourEnd= '$openinghourend', storeName = '$storename', Slogan = '$slogan', Location = '$location', Website = '$website', Mobile = '$mobile', Email = '$email', Description = '$description', facebook = '$facebook', twitter = '$twitter', linkedin = '$linkedin', youtube = '$youtube' WHERE storeUserId = $userid";
+       $result = $db->query($updatetdata);
+       if ($result) {
+           $_SESSION['store_update_form_submit']='true';
+           echo '<script>
+         Swal.fire({"title":"Store Added Successfully","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
+         window.location = "my-store.php";
+      </script>';
+       } else {
+           echo '<script>
+         Swal.fire({"title":"Store Not Added","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"error","position":"top-end"});
+      </script>';
+       }
+       $db->close();
+   }
+
 ?>
 
 
-
+        <script src="js/jquery.min.js "></script>
         <!-- Jquery Js -->
         <script src="tassets/dependencies/jquery/js/jquery.min.js"></script>
         <!-- Popper Js -->
@@ -432,7 +682,6 @@ include "include/header.php";
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtmXSwv4YmAKtcZyyad9W7D4AC08z0Rb4"></script>
         <!-- Site Scripts -->
         <script src="tassets/js/app.js"></script>
-        <script src="js/sweetalert.all.js"></script>
 
         <?php
     if (session_status() == PHP_SESSION_ACTIVE) {

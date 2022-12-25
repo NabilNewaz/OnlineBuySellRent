@@ -97,6 +97,13 @@ include("include/sidebar.php");
     $res=mysqli_query($con, "select * from product where hotitem='1'") or die("eRROR");
 
     while ($row=mysqli_fetch_array($res)) {
+        $subareaid = $row['subareaid'];
+        $subarea=mysqli_query($con, "select subareaname from subarea where id = $subareaid") or die("eRROR");
+        $subarearow=mysqli_fetch_array($subarea);
+
+        $datetime1 = date_create($row['adddate']);
+        $datetime2 = date_create(date("y-m-d h:i:s"));
+        $interval = date_diff($datetime1, $datetime2);
         echo "<div class='product-box-layout1'>
                 <div class=''>
                         <div class='item-img'>
@@ -108,11 +115,11 @@ include("include/sidebar.php");
                         <div class='item-price'>
                             <span class='currency-symbol'>BDT </span>".$row['price']."
                         </div>
-                <h3 class='item-title mb-0' style='height:55px'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
+                <h3 class='item-title mb-0'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
                 <h3 class='item-title mb-0'><span class='ml-0'>".$row['condition']."</span></h3>
                 <ul class='entry-meta'>
-                <li class='d-none d-md-block'><i class='far fa-clock'></i>1 year ago</li>
-                <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i> আজিমপুর</div></li>
+                <li class='d-none d-md-block'><i class='far fa-clock'></i>".$interval->format('%m')." months ago</li>
+                <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i>". ucfirst($subarearow['subareaname'])."</div></li>
                 </ul>
 
                 <div class='d-none d-md-block'>
@@ -190,8 +197,16 @@ include("include/sidebar.php");
 
     while ($row=mysqli_fetch_array($res)) {
         $catagoryid = $row['categoryid'];
+        $subareaid = $row['subareaid'];
         $catagory=mysqli_query($con, "select categoryname from category where id = $catagoryid") or die("eRROR");
         $catagoryrow=mysqli_fetch_array($catagory);
+
+        $subarea=mysqli_query($con, "select subareaname from subarea where id = $subareaid") or die("eRROR");
+        $subarearow=mysqli_fetch_array($subarea);
+
+        $datetime1 = date_create($row['adddate']);
+        $datetime2 = date_create(date("y-m-d h:i:s"));
+        $interval = date_diff($datetime1, $datetime2);
         echo "<div class='col-xl-4  col-6 px-only-sm-1'>
                 <div class='product-grid-view'>
                 <div class='grid-view-layout2'>
@@ -202,8 +217,6 @@ include("include/sidebar.php");
                         </div>
                     </div>
                     <div class='item-content py-0 px-1 px-sm-3'>
-                        
-                        
                         <div class='item-tag d-none d-md-block'><a href='catWiseItems?id=".$row['categoryid']."'>".$catagoryrow['categoryname']."</a></div>
                         <div class='item-price font-only-sm-1'>
                             <span class='currency-symbol'>BDT </span>".$row['price']."<small> </small>
@@ -211,8 +224,8 @@ include("include/sidebar.php");
                         <h3 class='item-title mb-0 font-only-sm-1'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
                     
                         <ul class='entry-meta'>
-                            <li class='d-none d-md-block'><i class='far fa-clock'></i>6 months ago</li>
-                            <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i> Dhaka</div></li>
+                            <li class='d-none d-md-block'><i class='far fa-clock'></i>".$interval->format('%m')." months ago</li>
+                            <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i>". ucfirst($subarearow['subareaname'])."</div></li>
                         </ul>
 
                         <div class='d-none d-md-block'>

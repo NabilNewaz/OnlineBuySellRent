@@ -45,7 +45,7 @@
                                  </li>
 
                                  <li>
-                                     <a href="store/all.html">Stores</a>
+                                     <a href="all-store">Stores</a>
                                  </li>
 
 

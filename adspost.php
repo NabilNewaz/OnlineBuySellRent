@@ -101,7 +101,7 @@ include("function/function.php");
 
             <div style="padding: 1.875rem; margin-bottom: 50px;" class="post-ad-box-layout1 bg-accent">
                 <div class="post-ad-form light-box-content">
-                    <form id="adpost" action="#" method="post" enctype="multipart/form-data" class="form-group">
+                    <form id="adpost" action="" method="post" enctype="multipart/form-data" class="form-group">
                         <!--Hidden input for user id-->
                         <input class="form-control"
                             value="<?php echo $_SESSION['id']; ?>"

@@ -63,6 +63,12 @@ if (isset($_GET["details"])) {
     $see_product=$con->query($select);
 
     while ($row=$see_product->fetch_array()) {
+        $subareaid = $row['subareaid'];
+        $areaid = $row['areaid'];
+        $subarea=mysqli_query($con, "select subareaname from subarea where id = $subareaid") or die("eRROR");
+        $area=mysqli_query($con, "select areaname from area where id = $areaid") or die("eRROR");
+        $subarearow=mysqli_fetch_array($subarea);
+        $arearow=mysqli_fetch_array($area);
         ?>
    <section class="single-product-wrap-layout1 section-padding-equal-70 bg-accent">
       <div class="container">
@@ -75,50 +81,50 @@ if (isset($_GET["details"])) {
                            <div class="tab-content modal_image_able_panel">
                               <div class="tab-pane fade text-center bg-light  show active" id="gallery1"
                                  role="tabpanel">
-                                 <?php echo "<img class='modal_able_image'  src='images/".$row['image']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'>" 	?>
+                                 <?php echo "<img class='modal_able_image'  src='images/adsimages/".$row['image0']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'>" 	?>
                               </div>
                               <div class="tab-pane fade text-center bg-light " id="gallery2" role="tabpanel">
-                                 <?php echo " <img class='modal_able_image' src='images/".$row['image']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
+                                 <?php echo " <img class='modal_able_image' src='images/adsimages/".$row['image1']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
                               </div>
                               <div class="tab-pane fade text-center bg-light " id="gallery3" role="tabpanel">
-                                 <?php echo " <img class='modal_able_image' src='images/".$row['image']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
+                                 <?php echo " <img class='modal_able_image' src='images/adsimages/".$row['image2']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
                               </div>
                               <div class="tab-pane fade text-center bg-light " id="gallery4" role="tabpanel">
-                                 <?php echo " <img class='modal_able_image' src='images/".$row['image']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
+                                 <?php echo " <img class='modal_able_image' src='images/adsimages/".$row['image3']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
                               </div>
                               <div class="tab-pane fade text-center bg-light " id="gallery5" role="tabpanel">
-                                 <?php echo " <img class='modal_able_image' src='images/".$row['image']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
+                                 <?php echo " <img class='modal_able_image' src='images/adsimages/".$row['image4']."' type='button' alt='product' data-toggle='modal' data-target='#imageModal' style='max-height: 400px;'> " ?>
                               </div>
                            </div>
                            <ul class="nav nav-tabs" role="tablist">
                               <li class="nav-item">
                                  <a class="nav-link active" data-toggle="tab" href="#gallery1" role="tab"
                                     aria-selected="true">
-                                    <?php echo " <img class='img-thumbnail' src='images/".$row['image']."' alt='thumbnail' style='height: 60px;'>" ?>
+                                    <?php echo " <img class='img-thumbnail' src='images/adsimages/".$row['image0']."' alt='thumbnail' style='height: 60px;'>" ?>
                                  </a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link " data-toggle="tab" href="#gallery2" role="tab"
                                     aria-selected="false">
-                                    <?php echo " <img class='img-thumbnail' src='images/".$row['image']."' alt='thumbnail' style='height: 60px;'>" ?>
+                                    <?php echo " <img class='img-thumbnail' src='images/adsimages/".$row['image1']."' alt='thumbnail' style='height: 60px;'>" ?>
                                  </a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link " data-toggle="tab" href="#gallery3" role="tab"
                                     aria-selected="false">
-                                    <?php echo " <img class='img-thumbnail' src='images/".$row['image']."' alt='thumbnail' style='height: 60px;'>" ?>
+                                    <?php echo " <img class='img-thumbnail' src='images/adsimages/".$row['image2']."' alt='thumbnail' style='height: 60px;'>" ?>
                                  </a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link " data-toggle="tab" href="#gallery4" role="tab"
                                     aria-selected="false">
-                                    <?php echo " <img class='img-thumbnail' src='images/".$row['image']."' alt='thumbnail' style='height: 60px;'>" ?>
+                                    <?php echo " <img class='img-thumbnail' src='images/adsimages/".$row['image3']."' alt='thumbnail' style='height: 60px;'>" ?>
                                  </a>
                               </li>
                               <li class="nav-item">
                                  <a class="nav-link " data-toggle="tab" href="#gallery5" role="tab"
                                     aria-selected="false">
-                                    <?php echo " <img class='img-thumbnail' src='images/".$row['image']."' alt='thumbnail' style='height: 60px;'>" ?>
+                                    <?php echo " <img class='img-thumbnail' src='images/adsimages/".$row['image4']."' alt='thumbnail' style='height: 60px;'>" ?>
                                  </a>
                               </li>
                            </ul>
@@ -127,7 +133,9 @@ if (isset($_GET["details"])) {
                            <ul>
                               <li>Rating 0 <i class="far fa-star text-warning"></i></li>
                               <li><i class="far fa-clock"></i>May 16, 2022 07:02 PM</li>
-                              <li><i class="fas fa-map-marker-alt"></i>Uttar badda, gupipara,Dhaka 1212</li>
+                              <li><i
+                                    class="fas fa-map-marker-alt"></i><?php echo "".ucfirst($subarearow['subareaname']).", ".ucfirst($arearow['areaname'])."" ?>
+                              </li>
                               <li><i class="far fa-eye"></i>5 views</li>
                            </ul>
                         </div>
@@ -148,6 +156,12 @@ if (isset($_GET["details"])) {
         $usql = "SELECT * FROM users WHERE id = '$uid'";
         $userinfo = $con->query($usql);
         while ($urec = $userinfo->fetch_array()) {
+            if ($row['size']) {
+                $size = $row['size'];
+            }
+            if ($row['size'] == "") {
+                $size = 'No Size Added';
+            }
             echo "
                                        <div class='pl-1 text-dark'>Ad posted by
                                           <span class='font-weight-bold'>".ucfirst($urec['name'])."</span>
@@ -162,9 +176,9 @@ if (isset($_GET["details"])) {
                                           <dt class='col-5 col-md-4 col-xl-3'>Product Condition </dt>
                                           <dd class='col-7 col-md-8 col-xl-9'>".$row['condition']."</dd>
                                           <dt class='col-5 col-md-4 col-xl-3'>Price Type </dt>
-                                          <dd class='col-7 col-md-8 col-xl-9'>Negotiable</dd>
+                                          <dd class='col-7 col-md-8 col-xl-9'>".$row['pricetype']."</dd>
                                           <dt class='col-5 col-md-4 col-xl-3'>Size </dt>
-                                          <dd class='col-7 col-md-8 col-xl-9'>Full adult</dd>
+                                          <dd class='col-7 col-md-8 col-xl-9'>$size</dd>
                                           <dt class='col-5 col-md-4 col-xl-3'>Authenticity </dt>
                                           <dd class='col-7 col-md-8 col-xl-9'>Original</dd>
                                           <dt class='col-5 col-md-4 col-xl-3'>Ad Type </dt>
@@ -491,7 +505,7 @@ if (isset($_GET["details"])) {
             echo "<div class='product-box-layout1 box-shadwo-light mg-1'>
                                             <div class=''>
                                                     <div class='item-img'>
-                                                        <a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/".$row['image']."' alt='Featured ad'></a>
+                                                        <a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/adsimages/".$row['image0']."' alt='Featured ad'></a>
                                                     </div>
                                                 </div>
                                             <div class='item-content py-0'>

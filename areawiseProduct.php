@@ -112,7 +112,7 @@
                         echo "<div class='product-box-layout1'>
 			<div class=''>
 					<div class='item-img'>
-						<a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/".$row['image']."' alt='Featured ad'></a>
+						<a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/adsimages/".$row['image0']."' alt='Featured ad'></a>
 					</div>
 				</div>
 			 <div class='item-content py-0'>
