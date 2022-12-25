@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Selling Tips - Rent2SellBD</title>
+    <title>Contact - Rent2SellBD</title>
     <link rel="shortcut icon" type="image/x-icon" href="passets/img/favicon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,57 +56,62 @@
 
     <section class="section-padding-equal-70 bg-accent">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9 col-sm-12">
-                    <div class="faq-box-layout1">
-                        <h4 class="item-title text-center bg-danger text-white py-3">How to Sell Fast</h4>
-                        <p class="pt-3 pb-2">Posting a great ad isn’t rocket science – it is really easier than you
-                            might think. You can make your ads stand out and can earn some extra money by selling your
-                            new, gently used stuff to follow these experts' tips.</p>
-                        <div class="px-4">
-                            <ul class=" text-justify font-weight-light" style="list-style-type:disc;">
-                                <li>
-                                    <p>Choose the Right Category for your products when you post your Ads.</p>
-                                </li>
-                                <li>
-                                    <p>Use crystal clear pictures to make your ad stand out. A great picture is worth
-                                        more than a thousand words. The more good pictures on your ad, the faster the
-                                        chance of selling your items. Always upload the original picture of the item
-                                        instead of stock images or collected images. Post multiple photos of your item
-                                        from different angles.</p>
-                                </li>
-                                <li>
-                                    <p>Title should be catchy as it is the very first thing people see in your Ad post.
-                                        Write an attention-grabbing title if you want more people to click on your ad.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>Choose the right price-Everything sells if the price is reasonable. When you plan
-                                        to sell something, if you’re not sure how to price your items, spend some time &
-                                        take a look at what other sellers of prothomei.com are offering for similar
-                                        products. The lower the price, the higher the chance of selling.</p>
-                                </li>
-                                <li>
-                                    <p>Detail, Detail and Detail. It is said that more details mean more views. It
-                                        doesn’t matter what you are selling but details matter. So be descriptive and
-                                        provide a pinpoint description of your item.</p>
-                                </li>
-                                <li>
-                                    <p>Try to be more responsive. Check your chat box frequently for new messages and
-                                        reply at once. Add your phone number in the contact form and try to attend on
-                                        every call.</p>
-                                </li>
-                                <li>
-                                    <p>Promote your ad as it gains more than 10 times more views and increases the
-                                        chance of selling your item more quickly. </p>
-                                </li>
-                                <li>
-                                    <p>Offer Delivery or Shipping option.</p>
-                                </li>
-                                <li>
-                                    <p>Offer a Fair Return Policy.</p>
-                                </li>
-                            </ul>
+            <div class="contact-page-box-layout1 light-shadow-bg">
+                <div class="light-box-content">
+
+                    <div class="map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.6124024724486!2d90.36290241534935!3d23.76119739427984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755bf5822353807%3A0x775df426d9c3e85!2sNABIL%20NEWAZ!5e0!3m2!1sen!2sbd!4v1672001707368!5m2!1sen!2sbd"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+                    </div>
+
+                    <div class="row pt-5">
+                        <div class="col-md-6">
+                            <div class="contact-info">
+                                <h3 class="item-title">Information</h3>
+                                <ul>
+                                    <li><i class="fas fa-paper-plane"></i>OrbitGoli, Wesat Shewrapara, Mirpur,
+                                        Dhaka-1216</li>
+                                    <li><i class="fas fa-phone-volume"></i>+8801714940700</li>
+                                    <li><i class="far fa-envelope"></i>support@rent2sellbd.com</li>
+                                    <li><i class="fas fa-fax"></i> +8801714940700</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="contact-form-box">
+                                <h3 class="item-title">Send Us A Message</h3>
+                                <form action="contact2/send-mail" method="POST">
+                                    <input type="hidden" name="_token" value="N4HCYaiJdA62CA0SwYMJ5IsSB8ImdRISymtRl9UI">
+                                    <input type="hidden" name="_method" value="POST">
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Name *" class="form-control " name="name"
+                                            data-error="Name field is required" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" placeholder="Email *" class="form-control " name="email"
+                                            data-error="email field is required" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Subject *" class="form-control " name="subject"
+                                            data-error="Subject field is required" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea placeholder="Message *" class="textarea form-control " name="message"
+                                            id="form-message" rows="8" cols="20" data-error="Message field is required"
+                                            required></textarea>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="submit-btn">SUBMIT</button>
+                                    </div>
+                                    <div class="form-response"></div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

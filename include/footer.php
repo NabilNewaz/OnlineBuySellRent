@@ -39,7 +39,7 @@
                         </div>
                         <div class="footer-menu-box">
                             <ul>
-                                <li><a href="pages/blog.html">Blog & Articles</a></li>
+                                <li><a href="blog.php">Blog & Articles</a></li>
 
                                 <li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
                                 <li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
@@ -60,7 +60,7 @@
                                 <li><a href="pages/faq.html">FAQ</a></li>
                                 <li><a href="pages/how-to-stay-safe.html">How to Stay Safe</a></li>
 
-                                <li><a href="pages/contact.html">Contact Us</a></li>
+                                <li><a href="contact.php">Contact Us</a></li>
                             </ul>
                             <div class="pt-3">
                                 <img src="passets/img/payment.png" alt="">

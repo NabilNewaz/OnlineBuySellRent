@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Selling Tips - Rent2SellBD</title>
+    <title>Blogs - Rent2SellBD</title>
     <link rel="shortcut icon" type="image/x-icon" href="passets/img/favicon.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,58 +56,24 @@
 
     <section class="section-padding-equal-70 bg-accent">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-9 col-sm-12">
-                    <div class="faq-box-layout1">
-                        <h4 class="item-title text-center bg-danger text-white py-3">How to Sell Fast</h4>
-                        <p class="pt-3 pb-2">Posting a great ad isn’t rocket science – it is really easier than you
-                            might think. You can make your ads stand out and can earn some extra money by selling your
-                            new, gently used stuff to follow these experts' tips.</p>
-                        <div class="px-4">
-                            <ul class=" text-justify font-weight-light" style="list-style-type:disc;">
-                                <li>
-                                    <p>Choose the Right Category for your products when you post your Ads.</p>
-                                </li>
-                                <li>
-                                    <p>Use crystal clear pictures to make your ad stand out. A great picture is worth
-                                        more than a thousand words. The more good pictures on your ad, the faster the
-                                        chance of selling your items. Always upload the original picture of the item
-                                        instead of stock images or collected images. Post multiple photos of your item
-                                        from different angles.</p>
-                                </li>
-                                <li>
-                                    <p>Title should be catchy as it is the very first thing people see in your Ad post.
-                                        Write an attention-grabbing title if you want more people to click on your ad.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>Choose the right price-Everything sells if the price is reasonable. When you plan
-                                        to sell something, if you’re not sure how to price your items, spend some time &
-                                        take a look at what other sellers of prothomei.com are offering for similar
-                                        products. The lower the price, the higher the chance of selling.</p>
-                                </li>
-                                <li>
-                                    <p>Detail, Detail and Detail. It is said that more details mean more views. It
-                                        doesn’t matter what you are selling but details matter. So be descriptive and
-                                        provide a pinpoint description of your item.</p>
-                                </li>
-                                <li>
-                                    <p>Try to be more responsive. Check your chat box frequently for new messages and
-                                        reply at once. Add your phone number in the contact form and try to attend on
-                                        every call.</p>
-                                </li>
-                                <li>
-                                    <p>Promote your ad as it gains more than 10 times more views and increases the
-                                        chance of selling your item more quickly. </p>
-                                </li>
-                                <li>
-                                    <p>Offer Delivery or Shipping option.</p>
-                                </li>
-                                <li>
-                                    <p>Offer a Fair Return Policy.</p>
-                                </li>
-                            </ul>
-                        </div>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="" id="result-empty" data-bg-image="tassets/images/result_empty.png"></div>
+                    <h3 class="text-center text-secondary bg-light py-3">Empty</h3>
+                </div>
+
+                <div class="col-lg-3 sidebar-break-md sidebar-widget-area">
+                    <div class="widget-lg widget-light-bg widget-search-box">
+                        <h3 class="widget-border-title">Search</h3>
+                        <form action="g" method="GET">
+                            <div class="input-group">
+                                <input type="search" class="form-control" name="name" aria-controls="dataTable"
+                                    placeholder="Search" value="">
+                                <div class="input-group-append">
+                                    <button type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

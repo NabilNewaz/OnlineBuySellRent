@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2022 at 04:58 PM
+-- Generation Time: Dec 25, 2022 at 10:32 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.28
 
@@ -224,7 +224,8 @@ INSERT INTO `product` (`id`, `user_id`, `title`, `description`, `featurelist`, `
 (17, 1, 'ddaaass', ' asdasdasd', '', '600000', 'Fixed', 0, '2.jpg', '', '', '', '', 1, 11, 'asdasd', 8, 59, '', '', 'exchange', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 20:00:30', '0000-00-00 00:00:00'),
 (18, 1, 'hello', ' ok done', '', '550', 'Negotiable', 0, 'fifa-world-cup-22.jpg', 'maxresdefault.jpg', 'qatar-2022-logo-1667313584.jpg', 'f80782715f4715bf311825608f806a0f.jpg', 'asia-cup-2022.jpg', 2, 24, 'haritpul', 7, 48, '256GB', 'Green', 'sell', 'New', 'Tata', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-12-07 23:19:09', '0000-00-00 00:00:00'),
 (19, 1, 'dfsfsdf', ' dsfdsfdsf', '', '560', 'Fixed', 0, 'wp9145738.webp', '319379917_551240786555874_3677597608915805171_n.jpg', '', '', '', 1, 2, 'sdfsdfds', 2, 8, '', '', 'buy', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-25 04:47:47', '0000-00-00 00:00:00'),
-(20, 1, 'dfsfsdf', ' dsfdsfdsf', '', '560', 'Fixed', 0, 'wp9145738.webp', '319379917_551240786555874_3677597608915805171_n.jpg', '', '', '', 1, 2, 'sdfsdfds', 2, 8, '', '', 'buy', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-25 04:47:58', '0000-00-00 00:00:00');
+(20, 1, 'dfsfsdf', ' dsfdsfdsf', '', '560', 'Fixed', 0, 'wp9145738.webp', '319379917_551240786555874_3677597608915805171_n.jpg', '', '', '', 1, 2, 'sdfsdfds', 2, 8, '', '', 'buy', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-25 04:47:58', '0000-00-00 00:00:00'),
+(21, 1, 'asdasd', ' asdasda', '', '600', 'Negotiable', 0, 'wp9145738.webp', '319379917_551240786555874_3677597608915805171_n.jpg', '', '', '', 2, 24, 'asdasdasd', 2, 9, '', '', 'sell', 'Used', '', 'copy', 'store', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-25 18:44:13', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -272,15 +273,16 @@ CREATE TABLE `store` (
   `facebook` text NOT NULL,
   `twitter` text NOT NULL,
   `linkedin` text NOT NULL,
-  `youtube` text NOT NULL
+  `youtube` text NOT NULL,
+  `storeAddedTime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `store`
 --
 
-INSERT INTO `store` (`id`, `storeUserId`, `StoreBanner`, `StoreLogo`, `OpeningHours`, `openingHourStart`, `openingHourEnd`, `storeName`, `Slogan`, `Location`, `Website`, `Mobile`, `Email`, `Description`, `facebook`, `twitter`, `linkedin`, `youtube`) VALUES
-(1, 1, 'wp9145738.webp', 'headerbanner.jpg', 'always-open', '', '', 'The Bluest Eyedff', 'asdasdasd', 'dsfdsf', 'https://www.nabilnewaz.com', '01714940700', 'nabilnewaz@gmail.com', 'sdfdsfds', '', '', '', '');
+INSERT INTO `store` (`id`, `storeUserId`, `StoreBanner`, `StoreLogo`, `OpeningHours`, `openingHourStart`, `openingHourEnd`, `storeName`, `Slogan`, `Location`, `Website`, `Mobile`, `Email`, `Description`, `facebook`, `twitter`, `linkedin`, `youtube`, `storeAddedTime`) VALUES
+(1, 1, 'headerbanner.jpg', '1669737461Qc0Y9.jpg', 'custome-schedule', '03:26', '22:26', 'The Bluest Eye', 'asdasdasd', 'dfsfsdf', 'https://www.nabilnewaz.com', '01714940700', 'nabilnewaz@gmail.com', 'dsfdsfdsfdsf', '', '', '', '', '2022-12-25 01:43:13');
 
 -- --------------------------------------------------------
 
@@ -851,8 +853,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `phone`, `userphoto`, `usertype`, `registrationdate`, `lastlogindate`, `blocked`, `agree`, `nid`, `dob`, `storeid`) VALUES
-(1, 'Nabil Newaz', 'nabilnewaz@gmail.com', 'nabilnewaz@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 02:47:41', '2022-12-25 10:35:37', '', 'agreed', '7362041282', '1999-11-04', 1),
-(10, 'tukku', 'nabilnewaztaku@gmail.com', 'nabilnewaztukku@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 03:31:36', '0000-00-00 00:00:00', '', 'agreed', '7362041282', '2022-11-01', NULL),
+(1, 'Nabil Newaz', 'nabilnewaz@gmail.com', 'nabilnewaz@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 02:47:41', '2022-12-25 06:21:30', '', 'agreed', '7362041282', '1999-11-04', 1),
+(10, 'tukku', 'nabilnewaztaku@gmail.com', 'nabilnewaztukku@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 03:31:36', '2022-12-25 06:01:20', '', 'agreed', '7362041282', '2022-11-01', 3),
 (11, 'b7_31561138', 'nabilnewazgfg@gmail.com', 'nabilnewazdfgdfg@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 03:35:29', '0000-00-00 00:00:00', '', 'agreed', '7362041282', '2022-11-03', NULL);
 
 -- --------------------------------------------------------
@@ -979,7 +981,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `product_archive`

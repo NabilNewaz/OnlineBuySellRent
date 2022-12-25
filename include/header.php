@@ -45,7 +45,7 @@
                                  </li>
 
                                  <li>
-                                     <a href="all-store">Stores</a>
+                                     <a href="all-store.php">Stores</a>
                                  </li>
 
 
@@ -53,18 +53,16 @@
                                      <a href="javascript:void(0)" class="has-dropdown">Pages</a>
                                      <ul class="sub-menu">
                                          <li>
-                                             <a href="pages/blog.html">Blog</a>
+                                             <a href="blog.php">Blog</a>
                                          </li>
                                          <li>
-                                             <a href="pages/about.html">About</a>
+                                             <a href="about.php">About</a>
                                          </li>
                                          <li>
-                                             <a href="pages/contact.html">Contact</a>
+                                             <a href="contact.php">Contact</a>
                                          </li>
                                      </ul>
                                  </li>
-
-
 
                                  <li>
                                      <a href="javascript:void(0)" class="has-dropdown"><i class="far fa-user"></i></a>
