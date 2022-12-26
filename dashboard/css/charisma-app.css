@@ -167,7 +167,7 @@ select {
     white-space: nowrap;
 }
 
-.box-header h2 > i {
+.box-header h2>i {
     margin-top: 1px;
 }
 
@@ -244,12 +244,13 @@ ul.dashboard-list li a span {
     margin-bottom: 40px !important;
 }
 
-.thumbnails > li {
+.thumbnails>li {
     display: inline-block;
     margin-left: 15px;
 }
 
-.thumbnail img, .thumbnail > a {
+.thumbnail img,
+.thumbnail>a {
     z-index: 2;
     height: 100px;
     width: 100px;
@@ -290,7 +291,9 @@ footer {
     clear: both;
 }
 
-div.center, p.center, img.center {
+div.center,
+p.center,
+img.center {
     margin-left: auto !important;
     margin-right: auto !important;
     float: none !important;
@@ -312,7 +315,7 @@ div.center, p.center, img.center {
     max-height: none;
 }
 
-.sidebar-nav > ul > li:not(.nav-header) {
+.sidebar-nav>ul>li:not(.nav-header) {
     margin-right: -2px;
     margin-left: -2px;
 }
@@ -327,9 +330,15 @@ div.center, p.center, img.center {
 
 .navbar-brand img {
     float: left;
-    height: 20px;
-    width: 20px;
+    height: 50px;
+    width: 100px;
     margin-right: 5px;
+    margin-top: 0px;
+}
+
+.brandlogo {
+    float: left;
+    margin-left: 15px;
 }
 
 .navbar-brand span {
@@ -442,11 +451,11 @@ ul.ajax-loaders {
     min-height: 297px;
 }
 
-.main-menu > li > a {
+.main-menu>li>a {
     border: 1px solid rgba(221, 221, 221, 0.46);
 }
 
-.main-menu > li {
+.main-menu>li {
     margin-top: 0 !important;
 }
 
@@ -485,7 +494,7 @@ ul.main-menu li:not(.nav-header) {
     transition: .3s;
 }
 
-.accordion > ul {
+.accordion>ul {
     display: none;
     margin-left: 10px;
 }
@@ -493,6 +502,7 @@ ul.main-menu li:not(.nav-header) {
 .nav-sm {
     display: none;
 }
+
 .preview-on-phone {
     height: 380px;
 
@@ -602,7 +612,8 @@ ul.github-buttons li {
         margin-left: inherit;
     }
 
-    ul.main-menu a:hover, .nav-sm a:hover {
+    ul.main-menu a:hover,
+    .nav-sm a:hover {
         background: none !important;
         color: grey;
     }
@@ -653,7 +664,7 @@ ul.github-buttons li {
         margin-right: 4%;
     }
 
-    .top-menu > li i {
+    .top-menu>li i {
         display: none;
     }
 
@@ -661,7 +672,8 @@ ul.github-buttons li {
         display: block !important;
     }
 
-    .sidebar-nav li a, .sidebar-nav .nav-header {
+    .sidebar-nav li a,
+    .sidebar-nav .nav-header {
         text-align: center
     }
 
@@ -673,7 +685,12 @@ ul.github-buttons li {
 
 /* Computer */
 @media only screen and (min-width: 980px) {
-    a, button, input[type=submit], input[type=button], .product-img {
+
+    a,
+    button,
+    input[type=submit],
+    input[type=button],
+    .product-img {
         -webkit-transition: .5s;
         -moz-transition: .5s;
         -ms-transition: .5s;
@@ -700,28 +717,141 @@ ul.github-buttons li {
 }
 
 .mc_embed_signup {
-    font: 14px Helvetica,Arial,sans-serif;
+    font: 14px Helvetica, Arial, sans-serif;
 }
-.power_field{position: absolute; left: -5000px;display: none;}
-.mc_embed_signup form {display:block; position:relative; text-align:left; padding:10px 0 10px 3%}
-.mc_embed_signup h2 {font-weight:bold; padding:0; margin:15px 0; font-size:1.4em;}
-.mc_embed_signup input {border:1px solid #999; -webkit-appearance:none;}
-.mc_embed_signup input[type=checkbox]{-webkit-appearance:checkbox;}
-.mc_embed_signup input[type=radio]{-webkit-appearance:radio;}
-.mc_embed_signup input:focus {border-color:#333;}
-.mc_embed_signup .button {clear:both; background-color: #aaa; border: 0 none; border-radius:4px; color: #FFFFFF; cursor: pointer; display: inline-block; font-size:15px; font-weight: bold; height: 32px; line-height: 32px; margin: 0 5px 10px 0; padding:0; text-align: center; text-decoration: none; vertical-align: top; white-space: nowrap; width: auto;}
-.mc_embed_signup .button:hover {background-color:#777;}
-.mc_embed_signup .small-meta {font-size: 11px;}
-.mc_embed_signup .nowrap {white-space:nowrap;}
-.mc_embed_signup .clear {clear:none; display:inline;}
 
-.mc_embed_signup label {display:block; font-size:16px; padding-bottom:10px; font-weight:bold;}
-.mc_embed_signup input.email {display:block; padding:8px 0; margin:0 4% 10px 0; text-indent:5px; width:58%; min-width:130px;}
-.mc_embed_signup input.button {display:block; width:35%; margin:0 0 10px 0; min-width:90px;}
+.power_field {
+    position: absolute;
+    left: -5000px;
+    display: none;
+}
 
-.mc_embed_signup div#mce-responses {float:left; top:-1.4em; padding:0em .5em 0em .5em; overflow:hidden; width:90%;margin: 0 5%; clear: both;}
-.mc_embed_signup div.response {margin:1em 0; padding:1em .5em .5em 0; font-weight:bold; float:left; top:-1.5em; z-index:1; width:80%;}
-.mc_embed_signup #mce-error-response {display:none;}
-.mc_embed_signup #mce-success-response {color:#529214; display:none;}
-.mc_embed_signup label.error {display:block; float:none; width:auto; margin-left:1.05em; text-align:left; padding:.5em 0;}
+.mc_embed_signup form {
+    display: block;
+    position: relative;
+    text-align: left;
+    padding: 10px 0 10px 3%
+}
 
+.mc_embed_signup h2 {
+    font-weight: bold;
+    padding: 0;
+    margin: 15px 0;
+    font-size: 1.4em;
+}
+
+.mc_embed_signup input {
+    border: 1px solid #999;
+    -webkit-appearance: none;
+}
+
+.mc_embed_signup input[type=checkbox] {
+    -webkit-appearance: checkbox;
+}
+
+.mc_embed_signup input[type=radio] {
+    -webkit-appearance: radio;
+}
+
+.mc_embed_signup input:focus {
+    border-color: #333;
+}
+
+.mc_embed_signup .button {
+    clear: both;
+    background-color: #aaa;
+    border: 0 none;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 5px 10px 0;
+    padding: 0;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: top;
+    white-space: nowrap;
+    width: auto;
+}
+
+.mc_embed_signup .button:hover {
+    background-color: #777;
+}
+
+.mc_embed_signup .small-meta {
+    font-size: 11px;
+}
+
+.mc_embed_signup .nowrap {
+    white-space: nowrap;
+}
+
+.mc_embed_signup .clear {
+    clear: none;
+    display: inline;
+}
+
+.mc_embed_signup label {
+    display: block;
+    font-size: 16px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.mc_embed_signup input.email {
+    display: block;
+    padding: 8px 0;
+    margin: 0 4% 10px 0;
+    text-indent: 5px;
+    width: 58%;
+    min-width: 130px;
+}
+
+.mc_embed_signup input.button {
+    display: block;
+    width: 35%;
+    margin: 0 0 10px 0;
+    min-width: 90px;
+}
+
+.mc_embed_signup div#mce-responses {
+    float: left;
+    top: -1.4em;
+    padding: 0em .5em 0em .5em;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 5%;
+    clear: both;
+}
+
+.mc_embed_signup div.response {
+    margin: 1em 0;
+    padding: 1em .5em .5em 0;
+    font-weight: bold;
+    float: left;
+    top: -1.5em;
+    z-index: 1;
+    width: 80%;
+}
+
+.mc_embed_signup #mce-error-response {
+    display: none;
+}
+
+.mc_embed_signup #mce-success-response {
+    color: #529214;
+    display: none;
+}
+
+.mc_embed_signup label.error {
+    display: block;
+    float: none;
+    width: auto;
+    margin-left: 1.05em;
+    text-align: left;
+    padding: .5em 0;
+}

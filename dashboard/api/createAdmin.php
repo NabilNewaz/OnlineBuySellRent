@@ -1,20 +1,20 @@
 <?php
+
 require 'db_config.php';
 
-  $post = $_POST;
-  
-	$sql = "INSERT INTO `admin`(`id`, `firstname`, `lastname`, `username`, `email`, `password`, `group`) VALUES (null,'".$post['firstname']."','".$post['lastname']."','".$post['username']."','".$post['email']."','".$post['password']."','".$post['group']."')";
+$post = $_GET;
 
-  $result = $con->query($sql);
+$sql = "INSERT INTO `admin`(`id`, `firstname`, `lastname`, `username`, `email`, `password`, `group`) VALUES (null,'".$post['firstname']."','".$post['lastname']."','".$post['username']."','".$post['email']."','".$post['password']."','".$post['group']."')";
+
+$result = $con->query($sql);
 
 
-  $sql = "SELECT * FROM admin Order by id desc LIMIT 1"; 
+$sql = "SELECT * FROM admin Order by id desc LIMIT 1";
 
-  $result = $con->query($sql);
+$result = $con->query($sql);
 
-  $data = $result->fetch_assoc();
+$data = $result->fetch_assoc();
 
 
 //echo json_encode($data);
-header ('Location ../index.php');
-?>
+header('Location ../index.php');
