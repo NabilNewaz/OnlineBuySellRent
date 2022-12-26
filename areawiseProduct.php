@@ -7,8 +7,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Ads In Area - - Rent2SellBD</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Search Result - Rent2SellBD</title>
+
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="passets/img/favicon.png">
 
@@ -57,25 +57,18 @@
     include("include/header.php");
     include("function/connection.php");
     include("function/function.php");
+    include("include/search.php");
     ?>
-
-
-
-    <?php
-                if (isset($_GET["subareaid"])) {
-                    $subareaid = $_GET["subareaid"];
-
-                    ?>
-
-    <?php
-                        include("include/search.php");
-                    ?>
-
     <div class="container">
         <?php
-                           include("include/sidebar.php");
-                    ?>
+    include("include/sidebar.php");
+    ?>
 
+        <?php
+if (isset($_GET["subareaid"])) {
+    $sub_area_id = $_GET["subareaid"];
+}
+    ?>
         <div class="col-xl-9 col-lg-8">
             <div class="flex-heading-layout1">
                 <div class="heading-layout2">
@@ -98,57 +91,66 @@
                 data-r-medium-nav="false" data-r-medium-dots="false" data-r-large="3" data-r-large-nav="false"
                 data-r-large-dots="false" data-r-extra-large="3" data-r-extra-large-nav="false"
                 data-r-extra-large-dots="false">
-
                 <?php
-                    include("pagination/function.php");
-                    $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
-                    $pro_id = 5;
-                    $limit = 5; //if you want to dispaly 10 records per page then you have to change here
-                    $startpoint = ($page * $limit) - $limit;
-                    $statement ="product where categoryid='".$pro_id."'"; //you have to pass your query over here
-                    $res=mysqli_query($con, "select * from product where categoryid='".$pro_id."' LIMIT {$startpoint},{$limit}") or die("eRROR");
 
-                    while ($row=mysqli_fetch_array($res)) {
-                        echo "<div class='product-box-layout1'>
-			<div class=''>
-					<div class='item-img'>
-						<a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/adsimages/".$row['image0']."' alt='Featured ad'></a>
-					</div>
-				</div>
-			 <div class='item-content py-0'>
-				<div class='item-tag d-none d-md-block'><a href='all-ad3eca.html?category=4'>Electronics</a></div>
-					<div class='item-price'>
-						<span class='currency-symbol'>BDT </span>".$row['price']."
-					</div>
-			 <h3 class='item-title mb-0' style='height:55px'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
-			 <h3 class='item-title mb-0'><span class='ml-0'>".$row['condition']."</span></h3>
-			 <ul class='entry-meta'>
-			<li class='d-none d-md-block'><i class='far fa-clock'></i>1 year ago</li>
-			<li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i> আজিমপুর</div></li>
-			</ul>
+        include("pagination/function.php");
+    $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
+    $pro_id = 5;
+    $limit = 5; //if you want to dispaly 10 records per page then you have to change here
+    $startpoint = ($page * $limit) - $limit;
+    $statement ="product where hotitem='1'"; //you have to pass your query over here
+    // $res=mysqli_query($con, "select * from product where categoryid='".$pro_id."' LIMIT {$startpoint},{$limit}") or die("eRROR");
+    $res=mysqli_query($con, "select * from product where hotitem='1'") or die("eRROR");
 
-			<div class='d-none d-md-block'>
-			</div>
+    while ($row=mysqli_fetch_array($res)) {
+        $subareaid = $row['subareaid'];
+        $subarea=mysqli_query($con, "select subareaname from subarea where id = $subareaid") or die("eRROR");
+        $subarearow=mysqli_fetch_array($subarea);
 
-			</div>
-			</div>";
-                    }
-                }
+        $datetime1 = date_create($row['adddate']);
+        $datetime2 = date_create(date("y-m-d h:i:s"));
+        $interval = date_diff($datetime1, $datetime2);
+        echo "<div class='product-box-layout1'>
+                <div class=''>
+                        <div class='item-img'>
+                            <a href='itemDetails.php?details=".$row['id']."' class='item-trending'><img src='images/adsimages/".$row['image0']."' alt='Featured ad'></a>
+                        </div>
+                    </div>
+                <div class='item-content py-0'>
+                    <div class='item-tag d-none d-md-block'><a href='all-ad3eca.html?category=4'>Electronics</a></div>
+                        <div class='item-price'>
+                            <span class='currency-symbol'>BDT </span>".$row['price']."
+                        </div>
+                <h3 class='item-title mb-0'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
+                <h3 class='item-title mb-0'><span class='ml-0'>".$row['condition']."</span></h3>
+                <ul class='entry-meta'>
+                <li class='d-none d-md-block'><i class='far fa-clock'></i>".$interval->format('%m')." months ago</li>
+                <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i>". ucfirst($subarearow['subareaname'])."</div></li>
+                </ul>
 
+                <div class='d-none d-md-block'>
+                </div>
+
+                </div>
+                </div>";
+    }
     ?>
-            </div>
 
+            </div>
+            <?php
+    $res=mysqli_query($con, "select * from product where subareaid=$sub_area_id") or die("eRROR");
+    $totalcount=mysqli_num_rows(mysqli_query($con, "select * from product where subareaid='".$sub_area_id."'"));
+    ?>
             <div class="product-filter-heading">
                 <div class="row align-items-center">
 
                     <div class="col-md-6">
                         <h2 class="item-title">
                             Showing
-                            <span class="font-medium">1</span>
-                            to
-                            <span class="font-medium">3</span>
+                            <?php echo $startpoint?> to
+                            <?php echo ($totalcount > $limit) ? ($page >=2) ? (($page-1)*$limit) + ($totalcount - (($page-1)*$limit)) : ($page*$limit) : $totalcount  ?>
                             of
-                            <span class="font-medium">3</span>
+                            <?php echo $totalcount ?>
                             results
                         </h2>
                     </div>
@@ -195,33 +197,38 @@
                 <div class="row">
 
                     <?php
-     $page = (int) (!isset($_GET["page"]) ? 1 : $_GET["page"]);
-    $limit = 5; //if you want to dispaly 10 records per page then you have to change here
-    $startpoint = ($page * $limit) - $limit;
-    $statement ="product where subareaid='".$subareaid."'"; //you have to pass your query over here
-    $res=mysqli_query($con, "select * from product where subareaid='".$subareaid."' LIMIT {$startpoint},{$limit}") or die("eRROR");
+
     while ($row=mysqli_fetch_array($res)) {
+        $catagoryid = $row['categoryid'];
+        $subareaid = $row['subareaid'];
+        $catagory=mysqli_query($con, "select categoryname from category where id = $catagoryid") or die("eRROR");
+        $catagoryrow=mysqli_fetch_array($catagory);
+
+        $subarea=mysqli_query($con, "select subareaname from subarea where id = $subareaid") or die("eRROR");
+        $subarearow=mysqli_fetch_array($subarea);
+
+        $datetime1 = date_create($row['adddate']);
+        $datetime2 = date_create(date("y-m-d h:i:s"));
+        $interval = date_diff($datetime1, $datetime2);
         echo "<div class='col-xl-4  col-6 px-only-sm-1'>
                 <div class='product-grid-view'>
                 <div class='grid-view-layout2'>
                     <div class='product-box-layout1 pb-2'>
                         <div class=''>
                             <div class='item-img'>
-                            <a href='itemDetails.php?details=".$row['id']."' class=''><img src='images/".$row['image']."' alt='Product'></a>
+                            <a href='itemDetails.php?details=".$row['id']."' class=''><img src='images/adsimages/".$row['image0']."' alt='Product'></a>
                         </div>
                     </div>
                     <div class='item-content py-0 px-1 px-sm-3'>
-                        
-                        
-                        <div class='item-tag d-none d-md-block'><a href='all-ad7a81.html?category=1'>Business &amp; Industry</a></div>
+                        <div class='item-tag d-none d-md-block'><a href='catWiseItems?id=".$row['categoryid']."'>".$catagoryrow['categoryname']."</a></div>
                         <div class='item-price font-only-sm-1'>
                             <span class='currency-symbol'>BDT </span>".$row['price']."<small> </small>
                         </div>
                         <h3 class='item-title mb-0 font-only-sm-1'><a href='itemDetails.php?details=".$row['id']."'>".$row['title']."</a></h3>
                     
                         <ul class='entry-meta'>
-                            <li class='d-none d-md-block'><i class='far fa-clock'></i>6 months ago</li>
-                            <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i> Dhaka</div></li>
+                            <li class='d-none d-md-block'><i class='far fa-clock'></i>".$interval->format('%m')." months ago</li>
+                            <li><div class='text-truncate'><i class='fas fa-map-marker-alt'></i>". ucfirst($subarearow['subareaname'])."</div></li>
                         </ul>
 
                         <div class='d-none d-md-block'>
@@ -235,7 +242,7 @@
             <div class='product-box-layout3'>
                 <div class='mr-3 '>
                     <div class='item-img mr-0'>
-                        <a href='itemDetails.php?details=".$row['id']."' class=''> <img src='images/".$row['image']."' alt='Product' style='object-position: top;'></a>
+                        <a href='itemDetails.php?details=".$row['id']."' class=''> <img src='images/adsimages/".$row['image0']."' alt='Product' style='object-position: top;'></a>
                     </div>
                 </div>
 
@@ -283,16 +290,31 @@
     </div>";
     }
     ?>
+                    <div class="col-lg-12 <?php if ($totalcount > 0) {
+                        echo "d-none";
+                    } else {
+                        echo "d-block";
+                    }?>">
+                        <div class="tab-content">
+
+                            <div class="" id="result-empty" data-bg-image="tassets/images/result_empty.png"
+                                style="background-image: url('tassets/images/result_empty.png');">
+                            </div>
+                            <h3 class="text-center text-secondary bg-light py-3">Empty</h3>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <?php
-echo pagination($con, $statement, $limit, $page, $url='areawiseProduct.php?subareaid='.$subareaid.'&');
-    echo "</div></br></br>";
-    ?>
         </div>
     </div>
     </div>
+    </div>
+    </div>
+    </div>
+
+
     <?php
             include("include/footer.php");
     ?>

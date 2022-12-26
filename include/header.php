@@ -36,10 +36,7 @@
                                              <a href="all-ads.php">All Ads</a>
                                          </li>
                                          <li>
-                                             <a href="ad/featured-ads.html">Featured Ads</a>
-                                         </li>
-                                         <li>
-                                             <a href="ad/auction-ads.html">Auction Ads</a>
+                                             <a href="featured-ads.php">Featured Ads</a>
                                          </li>
                                      </ul>
                                  </li>

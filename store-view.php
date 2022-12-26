@@ -149,7 +149,7 @@
     $startpoint = ($page * $limit) - $limit;
     $statement ="product"; //you have to pass your query over here
     $res=mysqli_query($con, "select * from product where storeid=$storeid and publishtype='store'") or die("eRROR");
-    $totalcount=mysqli_num_rows(mysqli_query($con, "select * from store where id=$storeid"));
+    $totalcount=mysqli_num_rows(mysqli_query($con, "select * from product where storeid=$storeid and publishtype='store'"));
     ?>
 
                 <div class="col-xl-9 col-lg-8">
@@ -159,7 +159,7 @@
                             <div class="col-md-6">
                                 <h2 class="item-title">
                                     Showing
-                                    <?php echo $startpoint+1 ?> to
+                                    <?php echo $startpoint?> to
                                     <?php echo ($totalcount > $limit) ? ($page >=2) ? (($page-1)*$limit) + ($totalcount - (($page-1)*$limit)) : ($page*$limit) : $totalcount  ?>
                                     of
                                     <?php echo $totalcount ?>
@@ -320,6 +320,21 @@ while ($row=mysqli_fetch_array($res)) {
 </div>";
 }
     ?>
+
+                            <div class="col-lg-12 <?php if ($totalcount > 0) {
+                                echo "d-none";
+                            } else {
+                                echo "d-block";
+                            }?>">
+                                <div class="tab-content">
+
+                                    <div class="" id="result-empty" data-bg-image="tassets/images/result_empty.png"
+                                        style="background-image: url('tassets/images/result_empty.png');">
+                                    </div>
+                                    <h3 class="text-center text-secondary bg-light py-3">Empty</h3>
+
+                                </div>
+                            </div>
 
                         </div>
                     </div>

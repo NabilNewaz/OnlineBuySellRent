@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2022 at 10:32 PM
+-- Generation Time: Dec 26, 2022 at 10:18 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.28
 
@@ -42,15 +42,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `firstname`, `lastname`, `username`, `email`, `password`, `group`) VALUES
-(1, 'Abdul', 'karim', 'karim', 'info@amadercode.com', '1111111111', '1'),
-(2, 'hasan', 'mahadi', 'hasan', 'wpr@gmail.com', '123456789', '2'),
-(11, 'Lokman', 'Islam', 'Nislam', 'admin@gmail.com', '123434', '4'),
-(12, 'Jahir', 'Islam', 'jIslam', 'we@dfg.com', '234234', '2'),
-(15, 'Nahid', 'islam', 'nahid323', 'jml@gmail.com', '213345', '3'),
-(16, 'Mamun', 'Sir', 'mamunsir', 'jsdfh@gmail.com', '38274435', '4'),
-(17, 'lokman', 'hossen', 'lokman', 'nabilnewaz@gmail.com', '12345', '6'),
-(18, 'Golam', 'Morshed', 'moeshed', 'morshed@gmail.com', '12345', '1'),
-(19, 'Md. Abdul Halim', 'Shumon', 'shumon', 'shumon@gmail.com', '122334', '1');
+(17, 'Nabil', 'Newaz', 'nabilnewaz', 'nabilnewaz@gmail.com', '12345', '1'),
+(20, 'Anika', 'Tabassum', 'anikatabassum', 'anika@gmail.com', '12345', '1');
 
 -- --------------------------------------------------------
 
@@ -208,24 +201,13 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `user_id`, `title`, `description`, `featurelist`, `price`, `pricetype`, `discount`, `image0`, `image1`, `image2`, `image3`, `image4`, `areaid`, `subareaid`, `location`, `categoryid`, `subcategoryid`, `size`, `color`, `adtype`, `condition`, `brand`, `authenticity`, `publishtype`, `storeid`, `phone`, `email`, `wpnumber`, `zipcode`, `approve`, `hotitem`, `adddate`, `expiredate`) VALUES
-(1, 1, 'Test', ' onek boro', 'hae bobo ronek', '550', 'On Call', 0, 'Untitled-2.jpg', '', '', '', '', 1, 4, 'asben niye jaben', 1, 2, '', '', 'rental', 'New', 'Team', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-11-06 19:56:34', '0000-00-00 00:00:00'),
-(2, 1, 'ok done', ' aDSasdasd', 'asdasdasd', '560', 'Negotiable', 10, 'IMG_7632.JPG', '', '', '', '', 2, 26, 'asdasd', 4, 18, 'hello', 'kala', 'exchange', 'Used', 'Team', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 1, '2022-11-06 19:56:46', '0000-00-00 00:00:00'),
-(3, 1, 'CAr', ' valo ache', 'onek valo valo', '600000', 'Negotiable', 0, 'IMG_7630.JPG', 'IMG_7630.JPG', 'IMG_7630.JPG', 'IMG_7630.JPG', 'IMG_7630.JPG', 1, 7, 'dhakr modde', 2, 7, 'onek boro', 'Green', 'buy', 'Used', 'Tata', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-11-06 19:57:03', '0000-00-00 00:00:00'),
-(4, 1, 'CAr', ' valo ache', 'onek valo valo', '600000', 'Negotiable', 0, 'live_streaming.gif', 'live_streaming.gif', 'live_streaming.gif', 'live_streaming.gif', 'live_streaming.gif', 2, 23, 'dhakr modde', 1, 1, 'onek boro', 'Green', 'buy', 'Used', 'Tata', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-11-06 19:59:56', '0000-00-00 00:00:00'),
-(5, 1, 'CAr', ' valo ache', 'onek valo valo', '600000', 'Negotiable', 0, '1_b9v_673GuT-9JwgWM02W8A.gif', 'giphy (1).gif', 'nvisionl.png', 'livemeta.jpg', 'giphy.gif', 1, 2, 'dhakr modde', 3, 15, 'onek boro', 'Green', 'buy', 'Used', 'Tata', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-11-06 19:59:56', '0000-00-00 00:00:00'),
-(6, 1, 'dfgsg', ' dsfdsf', '', '600', 'Fixed', 0, 'giphy.gif', '', '', '', '', 2, 3, 'dsfsf', 3, 16, '', '', 'rental', 'New', '', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 1, '2022-12-08 13:30:50', '0000-00-00 00:00:00'),
-(7, 1, 'rdsfsdf', ' dfsfd', 'sdfsdf', '800', 'Fixed', 0, '1f0960_884864e33352489fadeb7147b0ded095_mv2.gif', '', '', '', '', 3, 36, 'sdfsdf', 2, 8, '', '', 'sell', 'Used', '', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 19:59:56', '0000-00-00 00:00:00'),
-(8, 1, 'dsfsdf', ' sdfdsf', 'sdfsdfsdf', '600000', 'Negotiable', 0, 'nvisionl.png', '', '', '', '', 3, 3, 'sdfdsfdsf', 4, 20, 'onek boro', '', 'rental', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-08 13:31:49', '0000-00-00 00:00:00'),
-(12, 1, 'gfdg', ' sdfdsfsdf', '', '900', 'Fixed', 0, '1_b9v_673GuT-9JwgWM02W8A.gif', '', '', '', '', 2, 26, 'sdfdsfdsf', 3, 16, 'dfgdf', '', 'rental', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 20:02:29', '0000-00-00 00:00:00'),
-(13, 1, 'dfgdfg', ' dfgdfg', '', '550', 'Fixed', 0, 'livemeta.jpg', '', '', '', '', 3, 35, 'dfgdfg', 5, 35, '', '', 'exchange', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 20:01:31', '0000-00-00 00:00:00'),
-(14, 1, 'dsfafaf', ' asdasdasd', '', '600000', 'Fixed', 0, '—Pngtree—red banner live streaming hd_5392751.png', '', '', '', '', 3, 37, 'asdsad', 3, 15, '', '', 'sell', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 20:01:18', '0000-00-00 00:00:00'),
-(15, 1, 'dasdd', ' asdasdasd', '', '695', 'Fixed', 0, 'livemeta.jpg', '', '', '', '', 3, 34, 'asdasd', 4, 21, '', '', 'sell', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 20:01:00', '0000-00-00 00:00:00'),
-(16, 1, 'dasdasd', ' asdasd', '', '550', 'Fixed', 0, '1_b9v_673GuT-9JwgWM02W8A.gif', '', '', '', '', 3, 37, 'asdasdasd', 4, 22, '', '', 'rental', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 20:00:43', '0000-00-00 00:00:00'),
-(17, 1, 'ddaaass', ' asdasdasd', '', '600000', 'Fixed', 0, '2.jpg', '', '', '', '', 1, 11, 'asdasd', 8, 59, '', '', 'exchange', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-11-06 20:00:30', '0000-00-00 00:00:00'),
-(18, 1, 'hello', ' ok done', '', '550', 'Negotiable', 0, 'fifa-world-cup-22.jpg', 'maxresdefault.jpg', 'qatar-2022-logo-1667313584.jpg', 'f80782715f4715bf311825608f806a0f.jpg', 'asia-cup-2022.jpg', 2, 24, 'haritpul', 7, 48, '256GB', 'Green', 'sell', 'New', 'Tata', 'original', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-12-07 23:19:09', '0000-00-00 00:00:00'),
-(19, 1, 'dfsfsdf', ' dsfdsfdsf', '', '560', 'Fixed', 0, 'wp9145738.webp', '319379917_551240786555874_3677597608915805171_n.jpg', '', '', '', 1, 2, 'sdfsdfds', 2, 8, '', '', 'buy', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-25 04:47:47', '0000-00-00 00:00:00'),
-(20, 1, 'dfsfsdf', ' dsfdsfdsf', '', '560', 'Fixed', 0, 'wp9145738.webp', '319379917_551240786555874_3677597608915805171_n.jpg', '', '', '', 1, 2, 'sdfsdfds', 2, 8, '', '', 'buy', '', '', '', 'individual', 0, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-25 04:47:58', '0000-00-00 00:00:00'),
-(21, 1, 'asdasd', ' asdasda', '', '600', 'Negotiable', 0, 'wp9145738.webp', '319379917_551240786555874_3677597608915805171_n.jpg', '', '', '', 2, 24, 'asdasdasd', 2, 9, '', '', 'sell', 'Used', '', 'copy', 'store', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 0, 0, 0, '2022-12-25 18:44:13', '0000-00-00 00:00:00');
+(1, 1, 'Toyota Allion A15 2008', ' ব্র্যান্ড: Toyota\r\nমডেল: Allion\r\nমডেল ইয়ার: 2008\r\nরেজিস্ট্রেশন সাল: 2017\r\nকন্ডিশন: ব্যবহৃত\r\nট্রান্সমিশন: অটোমেটিক\r\nবডি টাইপ: সেলুন\r\nফুয়েল টাইপ: অকটেন\r\nইঞ্জিন ক্ষমতা: ১,৫০০ সিসি\r\nকিলোমিটার চলেছে: ৪১,', '', '1650000', 'Negotiable', 0, '1621331770Wenyo.jpg', '1621338371erGPW.jpg', '1621331770Wenyo.jpg', '1621338371erGPW.jpg', '1621331770Wenyo.jpg', 1, 7, 'Ruposhi Pro Active Village, Mirpur 13', 2, 7, 'Large', 'Sky Blue', 'sell', 'Used', 'Toyota', 'original', 'individual', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-12-26 02:10:07', '0000-00-00 00:00:00'),
+(2, 1, 'SAMSUNG QN90B NEO QLED 4K VOICE CONTROL ', ' 75” Class QN90B Samsung Neo QLED 4K Smart TV (2022)\r\nModel: 75QN90B\r\nScreen Size 75\"\r\nResolution 3,840 x 2,160\r\nRefresh Rate - 120Hz\r\nMotion Xcelerator Turbo+\r\nNeo Quantum Processor 4K\r\nEyeComfort Pi', '', '38000', 'On Call', 0, '1672038700C6DTi.jpg', '1672038700htF9c.jpg', '16720387001DbNw.png', '1672038700C6DTi.jpg', '1672038700htF9c.jpg', 2, 27, '55/B, NOAKHALI TOWER, NUE (4th Floor)', 4, 22, '42 inch', 'Black', 'sell', 'New', 'Samsung', '', 'individual', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-12-26 02:14:21', '0000-00-00 00:00:00'),
+(3, 1, 'Canon IXUS 185 20.0 MP 8X Optical Zoom D', ' CANON IXUS 185 20.0 MP 8X OPTICAL ZOOM CAMERA\r\nমামা সাউথ আফরিকা থেকে আনছে, শুধু ২/৩ দিন ইউস করা হয়েছে।\r\nফুল ফ্রেস। মার্কেট প্রাইস ১১-১৩ হাজারে দেখতে পাবেন। দাম fixed', '', '3500', 'Negotiable', 0, '1629291870BOZVr.jpg', '1629291870PBhfE.jpg', '16292918706D1i6.jpg', '162929187021684.jpg', '1629291870PBhfE.jpg', 7, 63, 'Maijdee bazar, Sirajganj', 4, 18, 'Small', 'Black', 'rental', 'Used', 'Canon', '', 'individual', 1, '01685346687', 'nabilnewaz@gmail.com', '01685346687', 1700, 0, 0, '2022-12-26 03:20:20', '0000-00-00 00:00:00'),
+(4, 1, 'V380 Mini HD 720P IP Camera, Two Way Int', ' V380 Camera General:\r\nModel No: Q6XHR\r\nPort: MICRO USB\r\nVideo Resolution: 1280*720\r\nWi-Fi modes: 2.4GHz\r\nFOV: 120 degrees\r\nIP camera performance: Real-time video capture and recording\r\nMotion Detecti', '', '1600', 'Fixed', 0, '1671035308FP5YY.jpg', '1671035308GyJuZ.jpg', '1671035308o00Sq.jpg', '1671035308upoKn.jpg', '16710353088miHV.jpg', 7, 56, 'Dhanshiri, 639-Ramchandrapur, Basar Road (Southern), Ghoramara, Boalia, Rajshahi, Bangladesh.', 4, 18, 'Small', 'White', 'sell', 'New', 'V380', '', 'store', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1609, 0, 0, '2022-12-26 03:28:07', '0000-00-00 00:00:00'),
+(5, 1, 'Double bed for sell', ' Double bed\r\nSize :\r\nLength --> 6 (1/2) ft\r\nWidth --> 5 ft\r\nIts in good condition\r\nLocation: Mirpur dohs, House #1138, rd 10, avenue 9, 2nd floor', '', '15000', 'Negotiable', 0, '1621311172uOLcs.jpg', '1621311172uOLcs.jpg', '1621311172uOLcs.jpg', '1621311172uOLcs.jpg', '1621311172uOLcs.jpg', 1, 7, 'Mirpur dohs, House #1138, rd 10, avenue 9, 2nd floor', 5, 35, 'Double', 'Kathali', 'sell', 'Used', 'Own Made', 'original', 'individual', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-12-26 03:33:55', '0000-00-00 00:00:00'),
+(6, 1, 'Xiaomi Enchen Boost Trimmer', ' Model: Boost\r\nMaterial: ABS.\r\nColor: Black.\r\nWeight: 142g\r\nSize: 43 x 164 mm\r\nPower: 5W\r\nVoltage: 5V\r\nCharging Time: 120 Minutes\r\nPower Supply: USB Charging.\r\nOne Button Locks The Length Of The Hairc', '', '1390', 'On Call', 0, '1647207405XGLRi.jpeg', '1647207405pIG3J.jpeg', '1647207405XGLRi.jpeg', '1647207405pIG3J.jpeg', '1647207405XGLRi.jpeg', 1, 7, '19/B, Rasulbag, Mohakhali, Dhaka', 9, 68, 'As Usual', 'Black', 'rental', 'Used', 'Xiaomi', '', 'individual', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-12-26 04:09:44', '0000-00-00 00:00:00'),
+(7, 1, 'acoustic guitar , (Thailand )', ' Ekdom Notun 3 month hoise 7500 taka diye kinsilam ,shokh kore kinsilam , Desher bahire chole jabo next month e . bajaitei pari nh ,dui ekdin nara chara korsi khali. almarite jotno kore rekhe disilam ', '', '5480', 'Negotiable', 0, '1643884474AzTEn.jpeg', '1643884474WzZfv.jpeg', '1643884475wep4h.jpeg', '1643884476SVtwM.jpeg', '1643884476z3s8C.jpeg', 1, 7, '15/6, Block-B, Uttora', 10, 73, 'As Usual', 'Glossy wooden', 'sell', 'Used', 'Thailand', 'original', 'individual', 1, '01714940700', 'nabilnewaz@gmail.com', '01714940700', 1209, 0, 0, '2022-12-26 04:16:07', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -387,7 +369,7 @@ CREATE TABLE `subcategory` (
 --
 
 INSERT INTO `subcategory` (`id`, `subcategoryname`, `categoryid`, `description`, `createdate`) VALUES
-(1, 'Industry Machinery & Tools', 1, 'Industry Machinery & Tools', '2022-04-25'),
+(1, 'Industry Machinery', 1, 'Industry Machinery', '2022-04-25'),
 (2, 'Medical Equipment & Supplies', 1, 'Medical Equipment & Supplies', '2022-04-08'),
 (3, 'Office Supplies', 1, 'Office Supplies & Stationary', '2022-04-08'),
 (4, 'Licence, Title & Tender', 1, 'Licence, Title & Tender', '2022-04-08'),
@@ -853,7 +835,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `phone`, `userphoto`, `usertype`, `registrationdate`, `lastlogindate`, `blocked`, `agree`, `nid`, `dob`, `storeid`) VALUES
-(1, 'Nabil Newaz', 'nabilnewaz@gmail.com', 'nabilnewaz@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 02:47:41', '2022-12-25 06:21:30', '', 'agreed', '7362041282', '1999-11-04', 1),
+(1, 'Nabil Newaz', 'nabilnewaz@gmail.com', 'nabilnewaz@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 02:47:41', '2022-12-26 09:16:55', '', 'agreed', '7362041282', '1999-11-04', 1),
 (10, 'tukku', 'nabilnewaztaku@gmail.com', 'nabilnewaztukku@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 03:31:36', '2022-12-25 06:01:20', '', 'agreed', '7362041282', '2022-11-01', 3),
 (11, 'b7_31561138', 'nabilnewazgfg@gmail.com', 'nabilnewazdfgdfg@gmail.com', '12345', '01714940700', NULL, 'Individual', '2022-11-01 03:35:29', '0000-00-00 00:00:00', '', 'agreed', '7362041282', '2022-11-03', NULL);
 
@@ -957,13 +939,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `area`
 --
 ALTER TABLE `area`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -981,7 +963,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `product_archive`
@@ -1005,7 +987,7 @@ ALTER TABLE `subarea`
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
-  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
+  MODIFY `id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=372;
 
 --
 -- AUTO_INCREMENT for table `userinfo`

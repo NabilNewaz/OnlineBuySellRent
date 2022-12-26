@@ -144,7 +144,7 @@ include("include/sidebar.php");
 
                     <div class="col-md-6">
                         <h2 class="item-title">
-                            Showing <?php echo $startpoint+1 ?> to
+                            Showing <?php echo $startpoint ?> to
                             <?php echo ($totalcount > $limit) ? ($page >=2) ? (($page-1)*$limit) + ($totalcount - (($page-1)*$limit)) : ($page*$limit) : $totalcount  ?>
                             of
                             <?php echo $totalcount ?>
@@ -287,6 +287,21 @@ include("include/sidebar.php");
     </div>";
     }
     ?>
+
+                    <div class="col-lg-12 <?php if ($totalcount > 0) {
+                        echo "d-none";
+                    } else {
+                        echo "d-block";
+                    }?>">
+                        <div class="tab-content">
+
+                            <div class="" id="result-empty" data-bg-image="tassets/images/result_empty.png"
+                                style="background-image: url('tassets/images/result_empty.png');">
+                            </div>
+                            <h3 class="text-center text-secondary bg-light py-3">Empty</h3>
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php
