@@ -1,3 +1,6 @@
+<?php
+error_reporting(0);
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -49,12 +52,12 @@
 
 <body class="sticky-header" id="app">
     <?php
-        include("function/area.php");
-    include("function/function.php");
-    include("include/header.php");
-    include("include/bannar.php");
-    include("include/search.php");
-    ?>
+       include("function/area.php");
+include("function/function.php");
+include("include/header.php");
+include("include/bannar.php");
+include("include/search.php");
+?>
 
     <br>
     <section id="content">
@@ -70,7 +73,7 @@
                     <div id="iconbarf" class="row text-center">
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="category-box-layout1">
-                                <a href="catWiseItems.php?id=5">
+                                <a href="catWiseItems.php?id=4">
                                     <div class="item-icon">
                                         <img src="images/1615012728vRLMv.png" alt="category">
                                     </div>
@@ -118,7 +121,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="category-box-layout1">
-                                <a href="catWiseItems.php?id=8">
+                                <a href="catWiseItems.php?id=5">
                                     <div class="item-icon">
                                         <img src="images/16150053460Qclp.png" alt="category">
                                     </div>
@@ -431,8 +434,8 @@
                         <h3 style="font-weight: bold;">Cities</h3>
                         <ul>
                             <?php
-                          getArea();
-    ?>
+                      getArea();
+?>
                         </ul><br>
                         <h3 style="font-weight: bold;">Division</h3>
                         <ul>
@@ -768,8 +771,8 @@
     </section>
 
     <?php
-        include("include/footer.php");
-    ?>
+    include("include/footer.php");
+?>
 
 
 
@@ -806,31 +809,31 @@
     <script src="js/sweetalert.all.js"></script>
 
     <?php
-    if (session_status() == PHP_SESSION_ACTIVE) {
-        if ($_SESSION['status'] == "success") {
-            echo '<script>
+if (session_status() == PHP_SESSION_ACTIVE) {
+    if ($_SESSION['status'] == "success") {
+        echo '<script>
             Swal.fire({"title":"Login Successful","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
         </script>';
-            $_SESSION['status']=null;
-        }
+        $_SESSION['status']=null;
     }
+}
 
-    if (session_status() == PHP_SESSION_ACTIVE) {
-        if ($_SESSION['status'] == "success_signup") {
-            echo '<script>
+if (session_status() == PHP_SESSION_ACTIVE) {
+    if ($_SESSION['status'] == "success_signup") {
+        echo '<script>
             Swal.fire({"title":"Successfully Registered","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"success","position":"top-end"});
         </script>';
-            $_SESSION['status']=null;
-        }
+        $_SESSION['status']=null;
     }
+}
 
-    if (isset($_GET['logout'])) {
-        header("location: index.php");
-        echo '<script>
+if (isset($_GET['logout'])) {
+    header("location: index.php");
+    echo '<script>
             Swal.fire({"title":"Logout Successful","text":"","timer":5000,"width":true,"padding":"1.1rem","showConfirmButton":false,"showCloseButton":true,"customClass":{"container":null,"popup":null,"header":null,"title":null,"closeButton":null,"icon":null,"image":null,"content":null,"input":null,"actions":null,"confirmButton":null,"cancelButton":null,"footer":null},"toast":true,"icon":"warning","position":"top-end"});
         </script>';
-    }
-    ?>
+}
+?>
 
 
     <script>

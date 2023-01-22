@@ -91,12 +91,11 @@
         ";
     }
     ?>
-                    <div
-                        class="col-lg-12 <?php if (mysqli_num_rows($res) > 0) {
-                            echo "d-none";
-                        } else {
-                            echo "d-block";
-                        }?>">
+                    <div class="col-lg-12 <?php if (mysqli_num_rows($res) > 0) {
+                        echo "d-none";
+                    } else {
+                        echo "d-block";
+                    }?>">
                         <div class="tab-content">
 
                             <div class="" id="result-empty" data-bg-image="tassets/images/result_empty.png"
